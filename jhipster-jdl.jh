@@ -1,0 +1,5 @@
+entity Entry {
+	value Float required,
+    label String required,
+    date Instant required
+}
