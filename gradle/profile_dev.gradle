@@ -3,7 +3,7 @@ dependencies {
     implementation "com.h2database:h2"
 }
 
-def profiles = "dev"
+def profiles = "dev,postgres"
 if (project.hasProperty("no-liquibase")) {
     profiles += ",no-liquibase"
 }

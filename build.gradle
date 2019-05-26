@@ -34,8 +34,11 @@ assert System.properties["java.specification.version"] == "1.8" || "11" || "12"
 
 apply plugin: "org.springframework.boot"
 apply plugin: "propdeps"
-
-apply from: "gradle/docker.gradle"
+if (project.hasProperty("raspberry")) {
+    apply from: "gradle/docker-raspberry.gradle"
+} else {
+    apply from: "gradle/docker.gradle"
+}
 apply from: "gradle/sonar.gradle"
 //jhipster-needle-gradle-apply-from - JHipster will add additional gradle scripts to be applied here
 
