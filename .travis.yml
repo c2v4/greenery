@@ -19,7 +19,6 @@ env:
     - SPRING_OUTPUT_ANSI_ENABLED=ALWAYS
     - SPRING_JPA_SHOW_SQL=false
     - JHI_DISABLE_WEBPACK_LOGS=true
-    - SONAR_TOKEN=15472a62a96f85f1dcee617aa0883ee667c0b63d
 before_install:
   - jdk_switcher use oraclejdk8
   - java -version
@@ -32,9 +31,10 @@ before_install:
 install:
   - npm install
 script:
+  - set -e
   - chmod +x gradlew
   - ./gradlew clean test integrationTest
-  - ./gradlew sonarqube --no-daemon -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+  - ./gradlew sonarqube -Dsonar.projectKey=c2v4_greenery -Dsonar.organization=c2v4-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
   - ./gradlew bootJar -Pprod -x test
   - ./gradlew jibDockerBuild -Pprod
   - ./gradlew jibDockerBuild -Pprod -Praspberry
