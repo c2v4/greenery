@@ -1,0 +1,11 @@
+version: '2'
+services:
+  greenery-postgresql:
+    image: postgres:11.2
+    # volumes:
+    #     - ~/volumes/jhipster/greenery/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=greenery
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432
