@@ -26,6 +26,9 @@ management:
         enabled: false
 
 spring:
+  profiles:
+      include:
+        - postgres
   devtools:
     restart:
       enabled: false

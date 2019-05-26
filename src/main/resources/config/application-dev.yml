@@ -51,6 +51,13 @@ spring:
 server:
   port: 8080
 
+application:
+    schedulers:
+        - type: random
+          name: temperature
+          props:
+              min: 16
+              max: 32
 # ===================================================================
 # JHipster specific properties
 #

@@ -21,6 +21,14 @@ public class Entry implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public Entry(){    }
+
+    public Entry(@NotNull Float value, @NotNull String label, @NotNull Instant date) {
+        this.value = value;
+        this.label = label;
+        this.date = date;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
