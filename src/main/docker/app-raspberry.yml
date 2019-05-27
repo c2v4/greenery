@@ -1,7 +1,7 @@
 version: '2'
 services:
     greenery-app:
-        image: c2v4/greenery
+        image: c2v4/greenery-raspberry
         environment:
             - _JAVA_OPTIONS=-Xmx196m -Xms128m
             - SPRING_PROFILES_ACTIVE=prod,swagger
@@ -11,7 +11,7 @@ services:
         ports:
             - 8080:8080
     greenery-postgresql:
-        image: postgres:11.2
+        image: arm32v7/postgres:11.2
         # volumes:
         #     - ~/volumes/jhipster/greenery/postgresql/:/var/lib/postgresql/data/
         environment:
@@ -21,7 +21,7 @@ services:
             - 5432:5432
 
     greenery-grafana:
-        image: grafana/grafana:6.1.4
+        image: grafana/grafana-arm32v7-linux:6.1.4
         volumes:
             - ./grafana/provisioning/:/etc/grafana/provisioning/
         environment:

@@ -1,6 +1,6 @@
 jib {
     from {
-        image = "arm32v7/openjdk:8-alpine"
+        image = "arm32v7/adoptopenjdk:11-hotspot"
     }
     to {
         image = "c2v4/greenery-raspberry:latest"
