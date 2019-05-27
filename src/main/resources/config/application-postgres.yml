@@ -12,7 +12,7 @@ spring:
     jpa:
         database-platform: io.github.jhipster.domain.util.FixedPostgreSQL95Dialect
         database: POSTGRESQL
-        show-sql: E
+        show-sql: false
         properties:
             hibernate.id.new_generator_mappings: true
             hibernate.connection.provider_disables_autocommit: true
