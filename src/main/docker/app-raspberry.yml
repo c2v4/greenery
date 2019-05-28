@@ -8,6 +8,7 @@ services:
             - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
             - SPRING_DATASOURCE_URL=jdbc:postgresql://greenery-postgresql:5432/greenery
             - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        restart: on-failure
     greenery-postgresql:
         image: arm32v7/postgres:11.2
         # volumes:
@@ -34,5 +35,4 @@ services:
         image: containrrr/watchtower:armhf-0.3.5
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
-            - /root/.docker/config.json:/config.json
         command: --interval 30
