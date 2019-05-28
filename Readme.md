@@ -5,3 +5,6 @@
 ![Docker Pulls](https://img.shields.io/docker/pulls/c2v4/greenery-raspberry.svg?label=greenery-raspberry%20pulls)
 
 Application that collects data and displays it in a fancy Grafana dashboard
+
+
+docker-compose -f src/main/docker/app.yml up
