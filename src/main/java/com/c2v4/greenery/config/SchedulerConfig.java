@@ -5,7 +5,7 @@ import java.util.Map;
 public class SchedulerConfig {
   private String type;
   private String name;
-  private Map<String, Object> props;
+  private Map<String, String> props;
 
   @Override
   public String toString() {
@@ -37,11 +37,11 @@ public class SchedulerConfig {
     this.name = name;
   }
 
-  public Map<String, Object> getProps() {
+  public Map<String, String> getProps() {
     return props;
   }
 
-  public void setProps(Map<String, Object> props) {
+  public void setProps(Map<String, String> props) {
     this.props = props;
   }
 }

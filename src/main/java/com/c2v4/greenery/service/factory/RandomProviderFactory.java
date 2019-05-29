@@ -13,8 +13,8 @@ public class RandomProviderFactory implements ProviderFactory {
 
     @Override
     public Supplier<Float> create(SchedulerConfig config) {
-        float min = ((Number)config.getProps().getOrDefault(MIN, 0)).floatValue();
-        float max = ((Number)config.getProps().getOrDefault(MAX, 100)).floatValue();
+        float min = Float.parseFloat(config.getProps().getOrDefault(MIN, "0"));
+        float max = Float.parseFloat(config.getProps().getOrDefault(MAX, "100"));
         return () -> (float) (min + Math.random() * (max - min));
     }
 }

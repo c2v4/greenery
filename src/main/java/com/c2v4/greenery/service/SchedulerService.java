@@ -9,13 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class SchedulerService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SchedulerService.class);
@@ -45,9 +46,8 @@ public class SchedulerService {
             Float value = scheduler.getValue();
             if (value == null) {
                 LOGGER.warn("Scheduler: {} produced no value", scheduler);
-            } else {
-                entryRepository.save(new Entry(value, scheduler.getLabel(), Instant.now()));
             }
+            entryRepository.save(new Entry(value, scheduler.getLabel(), Instant.now()));
         });
     }
 }

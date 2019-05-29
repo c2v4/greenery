@@ -5,11 +5,9 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Objects;
 
 /**
  * A Entry.
@@ -21,7 +19,8 @@ public class Entry implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Entry(){    }
+    public Entry() {
+    }
 
     public Entry(@NotNull Float value, @NotNull String label, @NotNull Instant date) {
         this.value = value;
@@ -34,7 +33,7 @@ public class Entry implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
+
     @Column(name = "jhi_value", nullable = false)
     private Float value;
 
