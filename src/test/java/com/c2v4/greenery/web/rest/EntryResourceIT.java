@@ -150,23 +150,6 @@ public class EntryResourceIT {
     }
 
 
-    @Test
-    @Transactional
-    public void checkValueIsRequired() throws Exception {
-        int databaseSizeBeforeTest = entryRepository.findAll().size();
-        // set the field null
-        entry.setValue(null);
-
-        // Create the Entry, which fails.
-
-        restEntryMockMvc.perform(post("/api/entries")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(entry)))
-            .andExpect(status().isBadRequest());
-
-        List<Entry> entryList = entryRepository.findAll();
-        assertThat(entryList).hasSize(databaseSizeBeforeTest);
-    }
 
     @Test
     @Transactional

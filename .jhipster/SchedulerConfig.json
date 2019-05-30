@@ -1,0 +1,36 @@
+{
+    "name": "SchedulerConfig",
+    "fields": [
+        {
+            "fieldName": "type",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "property",
+            "otherEntityRelationshipName": "schedulerConfig",
+            "relationshipName": "property"
+        }
+    ],
+    "changelogDate": "20190530064021",
+    "entityTableName": "scheduler_config",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
