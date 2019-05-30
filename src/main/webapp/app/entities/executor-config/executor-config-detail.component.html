@@ -5,14 +5,16 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Type</span></dt>
-                <dd>
-                    <span>{{executorConfig.type}}</span>
-                </dd>
                 <dt><span>Executor Label</span></dt>
                 <dd>
                     <div *ngIf="executorConfig.executorLabel">
                         <a [routerLink]="['/executor-label', executorConfig.executorLabel?.id, 'view']">{{executorConfig.executorLabel?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Executor Type</span></dt>
+                <dd>
+                    <div *ngIf="executorConfig.executorType">
+                        <a [routerLink]="['/executor-type', executorConfig.executorType?.id, 'view']">{{executorConfig.executorType?.id}}</a>
                     </div>
                 </dd>
             </dl>

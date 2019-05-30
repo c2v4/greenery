@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="executor_label"/>
 
+        <addForeignKeyConstraint baseColumnNames="executor_type_id"
+                                 baseTableName="executor_config"
+                                 constraintName="fk_executor_config_executor_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="executor_type"/>
+
     </changeSet>
 </databaseChangeLog>

@@ -57,6 +57,10 @@ public class CacheConfiguration {
             createCache(cm, com.c2v4.greenery.domain.ExecutorConfig.class.getName());
             createCache(cm, com.c2v4.greenery.domain.ExecutorConfig.class.getName() + ".properties");
             createCache(cm, com.c2v4.greenery.domain.ExecutorLabel.class.getName());
+            createCache(cm, com.c2v4.greenery.domain.SchedulerType.class.getName());
+            createCache(cm, com.c2v4.greenery.domain.SchedulerType.class.getName() + ".schedulerConfigs");
+            createCache(cm, com.c2v4.greenery.domain.ExecutorType.class.getName());
+            createCache(cm, com.c2v4.greenery.domain.ExecutorType.class.getName() + ".executorConfigs");
             // jhipster-needle-ehcache-add-entry
         };
     }

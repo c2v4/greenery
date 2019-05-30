@@ -2,11 +2,11 @@ package com.c2v4.greenery.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -30,10 +30,6 @@ public class SchedulerConfig implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
-    @Column(name = "jhi_type", nullable = false)
-    private String type;
-
     @OneToOne
     @JoinColumn(unique = true)
     private Label label;
@@ -42,6 +38,10 @@ public class SchedulerConfig implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Property> properties = new HashSet<>();
 
+    @ManyToOne
+    @JsonIgnoreProperties("schedulerConfigs")
+    private SchedulerType schedulerType;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -49,19 +49,6 @@ public class SchedulerConfig implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public SchedulerConfig type(String type) {
-        this.type = type;
-        return this;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Label getLabel() {
@@ -101,7 +88,21 @@ public class SchedulerConfig implements Serializable {
     public void setProperties(Set<Property> properties) {
         this.properties = properties;
     }
+
+    public SchedulerType getSchedulerType() {
+        return schedulerType;
+    }
+
+    public SchedulerConfig schedulerType(SchedulerType schedulerType) {
+        this.schedulerType = schedulerType;
+        return this;
+    }
+
+    public void setSchedulerType(SchedulerType schedulerType) {
+        this.schedulerType = schedulerType;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     public Map<String,String> getProps(){
         return properties.stream().collect(Collectors.toMap(Property::getKey, Property::getValue));
@@ -127,7 +128,7 @@ public class SchedulerConfig implements Serializable {
     public String toString() {
         return "SchedulerConfig{" +
             "id=" + getId() +
-            ", type='" + getType() + "'" +
+            ", type='" + getSchedulerType() + "'" +
             ", name='" + getLabel() + "'" +
             ", properties='" + getProperties() + "'" +
             "}";

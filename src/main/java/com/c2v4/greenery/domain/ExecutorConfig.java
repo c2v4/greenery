@@ -2,6 +2,7 @@ package com.c2v4.greenery.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -27,9 +28,6 @@ public class ExecutorConfig implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "jhi_type")
-    private String type;
-
     @OneToOne
     @JoinColumn(unique = true)
     private ExecutorLabel executorLabel;
@@ -38,6 +36,10 @@ public class ExecutorConfig implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Property> properties = new HashSet<>();
 
+    @ManyToOne
+    @JsonIgnoreProperties("executorConfigs")
+    private ExecutorType executorType;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -45,19 +47,6 @@ public class ExecutorConfig implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public ExecutorConfig type(String type) {
-        this.type = type;
-        return this;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public ExecutorLabel getExecutorLabel() {
@@ -97,6 +86,19 @@ public class ExecutorConfig implements Serializable {
     public void setProperties(Set<Property> properties) {
         this.properties = properties;
     }
+
+    public ExecutorType getExecutorType() {
+        return executorType;
+    }
+
+    public ExecutorConfig executorType(ExecutorType executorType) {
+        this.executorType = executorType;
+        return this;
+    }
+
+    public void setExecutorType(ExecutorType executorType) {
+        this.executorType = executorType;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -119,7 +121,6 @@ public class ExecutorConfig implements Serializable {
     public String toString() {
         return "ExecutorConfig{" +
             "id=" + getId() +
-            ", type='" + getType() + "'" +
             "}";
     }
 }

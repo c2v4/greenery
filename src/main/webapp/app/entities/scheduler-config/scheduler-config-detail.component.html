@@ -5,14 +5,16 @@
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Type</span></dt>
-                <dd>
-                    <span>{{schedulerConfig.type}}</span>
-                </dd>
                 <dt><span>Label</span></dt>
                 <dd>
                     <div *ngIf="schedulerConfig.label">
                         <a [routerLink]="['/label', schedulerConfig.label?.id, 'view']">{{schedulerConfig.label?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Scheduler Type</span></dt>
+                <dd>
+                    <div *ngIf="schedulerConfig.schedulerType">
+                        <a [routerLink]="['/scheduler-type', schedulerConfig.schedulerType?.id, 'view']">{{schedulerConfig.schedulerType?.id}}</a>
                     </div>
                 </dd>
             </dl>

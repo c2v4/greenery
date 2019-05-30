@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       service = injector.get(SchedulerConfigService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new SchedulerConfig(0, 'AAAAAAA');
+      elemDefault = new SchedulerConfig(0);
     });
 
     describe('Service methods', () => {
@@ -57,12 +57,7 @@ describe('Service Tests', () => {
       });
 
       it('should update a SchedulerConfig', async () => {
-        const returnedFromService = Object.assign(
-          {
-            type: 'BBBBBB'
-          },
-          elemDefault
-        );
+        const returnedFromService = Object.assign({}, elemDefault);
 
         const expected = Object.assign({}, returnedFromService);
         service
@@ -75,12 +70,7 @@ describe('Service Tests', () => {
       });
 
       it('should return a list of SchedulerConfig', async () => {
-        const returnedFromService = Object.assign(
-          {
-            type: 'BBBBBB'
-          },
-          elemDefault
-        );
+        const returnedFromService = Object.assign({}, elemDefault);
         const expected = Object.assign({}, returnedFromService);
         service
           .query(expected)
