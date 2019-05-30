@@ -19,15 +19,15 @@ spring:
 
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:file:./build/h2db/db/greenery;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:file:./build/h2db/db/greenery;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
     username: greenery
-    password:
+    password: greenery123
     hikari:
       poolName: Hikari
       auto-commit: false
   h2:
     console:
-      enabled: false
+      enabled: true
   jpa:
     database-platform: io.github.jhipster.domain.util.FixedH2Dialect
     database: H2

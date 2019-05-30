@@ -3,3 +3,17 @@ entity Entry {
     label String required,
     date Instant required
 }
+
+entity SchedulerConfig{
+	type String required,
+    name String required,
+}
+
+entity Property{
+	key String required,
+    value String
+}
+
+relationship OneToMany{
+	SchedulerConfig to Property
+}

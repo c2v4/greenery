@@ -1,18 +1,16 @@
 package com.c2v4.greenery.service;
 
-import com.c2v4.greenery.config.ApplicationProperties;
-import com.c2v4.greenery.config.SchedulerConfig;
 import com.c2v4.greenery.domain.Entry;
+import com.c2v4.greenery.domain.SchedulerConfig;
 import com.c2v4.greenery.repository.EntryRepository;
+import com.c2v4.greenery.repository.SchedulerConfigRepository;
 import com.c2v4.greenery.scheduler.Scheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,19 +23,15 @@ public class SchedulerService {
     private final List<Scheduler> schedulers;
     private final EntryRepository entryRepository;
 
-    public SchedulerService(
-        ApplicationProperties applicationProperties, SchedulerFactory schedulerFactory, EntryRepository entryRepository) {
+    public SchedulerService(SchedulerFactory schedulerFactory, SchedulerConfigRepository schedulerConfigRepository, EntryRepository entryRepository) {
         this.entryRepository = entryRepository;
-        List<SchedulerConfig> schedulerConfigs = applicationProperties.getSchedulers();
-        if (schedulerConfigs == null) {
-            this.schedulers = Collections.emptyList();
-        } else {
-            this.schedulers =
-                schedulerConfigs.stream()
-                    .map(schedulerFactory::createScheduler)
-                    .collect(Collectors.toList());
+        List<SchedulerConfig> schedulerConfigs = schedulerConfigRepository.findAll();
+        this.schedulers =
+            schedulerConfigs.stream()
+                .map(schedulerFactory::createScheduler)
+                .collect(Collectors.toList());
 
-        }
+
     }
 
     @Scheduled(fixedRate = SCHEDULER_RATE)

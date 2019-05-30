@@ -54,14 +54,6 @@ management:
       server:
         auto-time-requests: true
 
-application:
-    schedulers:
-        - type: random
-          name: temperature
-          props:
-              min: 16
-              max: 32
-
 spring:
   application:
     name: greenery

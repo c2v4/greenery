@@ -39,6 +39,9 @@ public class CacheConfiguration {
     public JCacheManagerCustomizer cacheManagerCustomizer() {
         return cm -> {
             createCache(cm, com.c2v4.greenery.domain.Entry.class.getName());
+            createCache(cm, com.c2v4.greenery.domain.SchedulerConfig.class.getName());
+            createCache(cm, com.c2v4.greenery.domain.SchedulerConfig.class.getName() + ".properties");
+            createCache(cm, com.c2v4.greenery.domain.Property.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

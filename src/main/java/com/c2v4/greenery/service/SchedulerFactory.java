@@ -1,13 +1,13 @@
 package com.c2v4.greenery.service;
 
-import com.c2v4.greenery.config.SchedulerConfig;
+import com.c2v4.greenery.domain.SchedulerConfig;
 import com.c2v4.greenery.scheduler.Scheduler;
 import com.c2v4.greenery.service.factory.ProviderFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
-@Component
+@Service
 public class SchedulerFactory {
 
     private final Map<String, ProviderFactory> providers;

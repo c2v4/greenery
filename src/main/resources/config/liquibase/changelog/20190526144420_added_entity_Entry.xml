@@ -41,18 +41,18 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20190526144420-1-data" author="jhipster" context="faker">
-        <loadData
-                  file="config/liquibase/data/entry.csv"
-                  separator=";"
-                  tableName="entry"
-                  context="dev">
-            <column name="id" type="numeric"/>
-            <column name="jhi_value" type="numeric"/>
-            <column name="jhi_label" type="string"/>
-            <column name="jhi_date" type="date"/>
-        </loadData>
-    </changeSet>
+    <!--<changeSet id="20190526144420-1-data" author="jhipster" context="faker">-->
+        <!--<loadData-->
+                  <!--file="config/liquibase/data/entry.csv"-->
+                  <!--separator=";"-->
+                  <!--tableName="entry"-->
+                  <!--context="dev">-->
+            <!--<column name="id" type="numeric"/>-->
+            <!--<column name="jhi_value" type="numeric"/>-->
+            <!--<column name="jhi_label" type="string"/>-->
+            <!--<column name="jhi_date" type="date"/>-->
+        <!--</loadData>-->
+    <!--</changeSet>-->
 
     <changeSet id="20190526144420-1-relations" author="jhipster">
 
