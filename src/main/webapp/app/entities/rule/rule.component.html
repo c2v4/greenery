@@ -1,0 +1,70 @@
+<div>
+    <h2 id="page-heading">
+        <span>Rules</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-rule" [routerLink]="['/rule/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Rule
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="rules">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Predicate</span></th>
+            <th><span>Value</span></th>
+            <th><span>Executor</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let rule of rules ;trackBy: trackId">
+                <td><a [routerLink]="['/rule', rule.id, 'view' ]">{{rule.id}}</a></td>
+                <td>
+                    <div *ngIf="rule.predicate">
+                        <a [routerLink]="['../predicate', rule.predicate?.id, 'view' ]" >{{rule.predicate?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="rule.value">
+                        <a [routerLink]="['../numeric', rule.value?.id, 'view' ]" >{{rule.value?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="rule.executor">
+                        <a [routerLink]="['../executor-label', rule.executor?.id, 'view' ]" >{{rule.executor?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/rule', rule.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/rule', rule.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'rule', { outlets: { popup: rule.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

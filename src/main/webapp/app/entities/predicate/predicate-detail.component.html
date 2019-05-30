@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="predicate">
+            <h2><span>Predicate</span> {{predicate.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Predicate Logic</span></dt>
+                <dd>
+                    <span>{{predicate.predicateLogic}}</span>
+                </dd>
+                <dt><span>Expression</span></dt>
+                <dd>
+                    <div *ngIf="predicate.expression">
+                        <a [routerLink]="['/expression', predicate.expression?.id, 'view']">{{predicate.expression?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Predicate</span></dt>
+                <dd>
+                    <div *ngIf="predicate.predicate">
+                        <a [routerLink]="['/predicate', predicate.predicate?.id, 'view']">{{predicate.predicate?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/predicate', predicate.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -22,7 +22,7 @@
             "relationshipName": "property"
         }
     ],
-    "changelogDate": "20190530194121",
+    "changelogDate": "20190530204017",
     "entityTableName": "executor_config",
     "dto": "no",
     "pagination": "no",

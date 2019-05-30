@@ -25,7 +25,7 @@
             "relationshipName": "property"
         }
     ],
-    "changelogDate": "20190530064021",
+    "changelogDate": "20190530204011",
     "entityTableName": "scheduler_config",
     "dto": "no",
     "pagination": "no",

@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="property">
+            <h2><span>Property</span> {{property.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Key</span></dt>
+                <dd>
+                    <span>{{property.key}}</span>
+                </dd>
+                <dt><span>Value</span></dt>
+                <dd>
+                    <span>{{property.value}}</span>
+                </dd>
+                <dt><span>Scheduler Config</span></dt>
+                <dd>
+                    <div *ngIf="property.schedulerConfig">
+                        <a [routerLink]="['/scheduler-config', property.schedulerConfig?.id, 'view']">{{property.schedulerConfig?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Executor Config</span></dt>
+                <dd>
+                    <div *ngIf="property.executorConfig">
+                        <a [routerLink]="['/executor-config', property.executorConfig?.id, 'view']">{{property.executorConfig?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/property', property.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

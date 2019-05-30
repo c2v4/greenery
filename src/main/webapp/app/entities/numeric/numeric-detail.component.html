@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="numeric">
+            <h2><span>Numeric</span> {{numeric.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Value</span></dt>
+                <dd>
+                    <span>{{numeric.value}}</span>
+                </dd>
+                <dt><span>Operation</span></dt>
+                <dd>
+                    <span>{{numeric.operation}}</span>
+                </dd>
+                <dt><span>Left</span></dt>
+                <dd>
+                    <div *ngIf="numeric.left">
+                        <a [routerLink]="['/numeric', numeric.left?.id, 'view']">{{numeric.left?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Right</span></dt>
+                <dd>
+                    <div *ngIf="numeric.right">
+                        <a [routerLink]="['/numeric', numeric.right?.id, 'view']">{{numeric.right?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Label</span></dt>
+                <dd>
+                    <div *ngIf="numeric.label">
+                        <a [routerLink]="['/label', numeric.label?.id, 'view']">{{numeric.label?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/numeric', numeric.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

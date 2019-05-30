@@ -28,7 +28,7 @@
             "relationshipName": "entry"
         }
     ],
-    "changelogDate": "20190530194114",
+    "changelogDate": "20190530204010",
     "entityTableName": "label",
     "dto": "no",
     "pagination": "no",

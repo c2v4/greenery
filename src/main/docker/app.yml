@@ -1,16 +1,38 @@
 version: '2'
 services:
   greenery-app:
-    image: greenery
+    image: c2v4/greenery
     environment:
-      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - _JAVA_OPTIONS=-Xmx196m -Xms128m
       - SPRING_PROFILES_ACTIVE=prod,swagger
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
       - SPRING_DATASOURCE_URL=jdbc:postgresql://greenery-postgresql:5432/greenery
       - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
-    ports:
-      - 8080:8080
+    restart: on-failure
   greenery-postgresql:
-    extends:
-      file: postgresql.yml
-      service: greenery-postgresql
+    image: postgres:11.2
+    # volumes:
+    #     - ~/volumes/jhipster/greenery/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=greenery
+      - POSTGRES_PASSWORD=greenery123
+    ports:
+      - 5432:5432
+
+  greenery-grafana:
+    image: grafana/grafana:6.1.4
+    volumes:
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+    ports:
+      - 3000:3000
+    depends_on:
+      - greenery-postgresql
+  watchtower:
+    image: containrrr/watchtower:0.3.5
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30

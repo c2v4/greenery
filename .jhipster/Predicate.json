@@ -40,7 +40,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20190530194118",
+    "changelogDate": "20190530204014",
     "entityTableName": "predicate",
     "dto": "no",
     "pagination": "no",

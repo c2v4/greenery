@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="rule">
+            <h2><span>Rule</span> {{rule.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Predicate</span></dt>
+                <dd>
+                    <div *ngIf="rule.predicate">
+                        <a [routerLink]="['/predicate', rule.predicate?.id, 'view']">{{rule.predicate?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Value</span></dt>
+                <dd>
+                    <div *ngIf="rule.value">
+                        <a [routerLink]="['/numeric', rule.value?.id, 'view']">{{rule.value?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Executor</span></dt>
+                <dd>
+                    <div *ngIf="rule.executor">
+                        <a [routerLink]="['/executor-label', rule.executor?.id, 'view']">{{rule.executor?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/rule', rule.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

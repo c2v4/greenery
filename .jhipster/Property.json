@@ -29,7 +29,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20190530064022",
+    "changelogDate": "20190530204012",
     "entityTableName": "property",
     "dto": "no",
     "pagination": "no",

@@ -30,8 +30,6 @@ public class SchedulerService {
             schedulerConfigs.stream()
                 .map(schedulerFactory::createScheduler)
                 .collect(Collectors.toList());
-
-
     }
 
     @Scheduled(fixedRate = SCHEDULER_RATE)

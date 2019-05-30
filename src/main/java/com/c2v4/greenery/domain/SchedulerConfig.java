@@ -38,7 +38,7 @@ public class SchedulerConfig implements Serializable {
     @JoinColumn(unique = true)
     private Label label;
 
-    @OneToMany(mappedBy = "schedulerConfig")
+    @OneToMany(mappedBy = "schedulerConfig",fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Property> properties = new HashSet<>();
 

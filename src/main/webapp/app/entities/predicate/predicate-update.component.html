@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-predicate-heading">Create or edit a Predicate</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!predicate.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_predicateLogic">Predicate Logic</label>
+                    <select class="form-control" name="predicateLogic" formControlName="predicateLogic" id="field_predicateLogic">
+                        <option value="AND">AND</option>
+                        <option value="OR">OR</option>
+                        <option value="JUST">JUST</option>
+                    </select>
+                    <div *ngIf="editForm.get('predicateLogic').invalid && (editForm.get('predicateLogic').dirty || editForm.get('predicateLogic').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('predicateLogic').errors.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_expression">Expression</label>
+                    <select class="form-control" id="field_expression" name="expression" formControlName="expression">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="expressionOption.id === editForm.get('expression').value?.id ? editForm.get('expression').value : expressionOption" *ngFor="let expressionOption of expressions; trackBy: trackExpressionById">{{expressionOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_predicate">Predicate</label>
+                    <select class="form-control" id="field_predicate" name="predicate" formControlName="predicate">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="predicateOption.id === editForm.get('predicate').value?.id ? editForm.get('predicate').value : predicateOption" *ngFor="let predicateOption of predicates; trackBy: trackPredicateById">{{predicateOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

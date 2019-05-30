@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-rule-heading">Create or edit a Rule</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!rule.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_predicate">Predicate</label>
+                    <select class="form-control" id="field_predicate" name="predicate" formControlName="predicate">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="predicateOption.id === editForm.get('predicate').value?.id ? editForm.get('predicate').value : predicateOption" *ngFor="let predicateOption of predicates; trackBy: trackPredicateById">{{predicateOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_value">Value</label>
+                    <select class="form-control" id="field_value" name="value" formControlName="value">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="numericOption.id === editForm.get('value').value?.id ? editForm.get('value').value : numericOption" *ngFor="let numericOption of values; trackBy: trackNumericById">{{numericOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_executor">Executor</label>
+                    <select class="form-control" id="field_executor" name="executor" formControlName="executor">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="executorLabelOption.id === editForm.get('executor').value?.id ? editForm.get('executor').value : executorLabelOption" *ngFor="let executorLabelOption of executors; trackBy: trackExecutorLabelById">{{executorLabelOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

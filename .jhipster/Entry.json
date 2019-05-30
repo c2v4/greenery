@@ -25,7 +25,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20190526144420",
+    "changelogDate": "20190530204009",
     "entityTableName": "entry",
     "dto": "no",
     "pagination": "no",

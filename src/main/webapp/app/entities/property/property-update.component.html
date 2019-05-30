@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-property-heading">Create or edit a Property</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!property.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_key">Key</label>
+                    <input type="text" class="form-control" name="key" id="field_key"
+                           formControlName="key"/>
+                    <div *ngIf="editForm.get('key').invalid && (editForm.get('key').dirty || editForm.get('key').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('key').errors.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_value">Value</label>
+                    <input type="text" class="form-control" name="value" id="field_value"
+                           formControlName="value"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_schedulerConfig">Scheduler Config</label>
+                    <select class="form-control" id="field_schedulerConfig" name="schedulerConfig" formControlName="schedulerConfig">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="schedulerConfigOption.id === editForm.get('schedulerConfig').value?.id ? editForm.get('schedulerConfig').value : schedulerConfigOption" *ngFor="let schedulerConfigOption of schedulerconfigs; trackBy: trackSchedulerConfigById">{{schedulerConfigOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_executorConfig">Executor Config</label>
+                    <select class="form-control" id="field_executorConfig" name="executorConfig" formControlName="executorConfig">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="executorConfigOption.id === editForm.get('executorConfig').value?.id ? editForm.get('executorConfig').value : executorConfigOption" *ngFor="let executorConfigOption of executorconfigs; trackBy: trackExecutorConfigById">{{executorConfigOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

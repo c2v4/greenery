@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-numeric-heading">Create or edit a Numeric</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!numeric.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_value">Value</label>
+                    <input type="number" class="form-control" name="value" id="field_value"
+                           formControlName="value"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_operation">Operation</label>
+                    <select class="form-control" name="operation" formControlName="operation" id="field_operation">
+                        <option value="ADD">ADD</option>
+                        <option value="SUBTRACT">SUBTRACT</option>
+                        <option value="MULTIPLY">MULTIPLY</option>
+                        <option value="DIVIDE">DIVIDE</option>
+                        <option value="MAX">MAX</option>
+                        <option value="MIN">MIN</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_left">Left</label>
+                    <select class="form-control" id="field_left" name="left" formControlName="left">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="numericOption.id === editForm.get('left').value?.id ? editForm.get('left').value : numericOption" *ngFor="let numericOption of lefts; trackBy: trackNumericById">{{numericOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_right">Right</label>
+                    <select class="form-control" id="field_right" name="right" formControlName="right">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="numericOption.id === editForm.get('right').value?.id ? editForm.get('right').value : numericOption" *ngFor="let numericOption of rights; trackBy: trackNumericById">{{numericOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_label">Label</label>
+                    <select class="form-control" id="field_label" name="label" formControlName="label">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="labelOption.id === editForm.get('label').value?.id ? editForm.get('label').value : labelOption" *ngFor="let labelOption of labels; trackBy: trackLabelById">{{labelOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

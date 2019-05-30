@@ -1,0 +1,68 @@
+<div>
+    <h2 id="page-heading">
+        <span>Properties</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-property" [routerLink]="['/property/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Property
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="properties">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Key</span></th>
+            <th><span>Value</span></th>
+            <th><span>Scheduler Config</span></th>
+            <th><span>Executor Config</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let property of properties ;trackBy: trackId">
+                <td><a [routerLink]="['/property', property.id, 'view' ]">{{property.id}}</a></td>
+                <td>{{property.key}}</td>
+                <td>{{property.value}}</td>
+                <td>
+                    <div *ngIf="property.schedulerConfig">
+                        <a [routerLink]="['../scheduler-config', property.schedulerConfig?.id, 'view' ]" >{{property.schedulerConfig?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="property.executorConfig">
+                        <a [routerLink]="['../executor-config', property.executorConfig?.id, 'view' ]" >{{property.executorConfig?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/property', property.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/property', property.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'property', { outlets: { popup: property.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
