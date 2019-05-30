@@ -33,7 +33,7 @@ install:
 script:
   - set -e
   - chmod +x gradlew
-  - ./gradlew clean test integrationTest
+#  - ./gradlew clean test integrationTest
   - ./gradlew sonarqube -Dsonar.projectKey=c2v4_greenery -Dsonar.organization=c2v4-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
   - ./gradlew bootJar -Pprod -x test
   - ./gradlew jibDockerBuild -Pprod
