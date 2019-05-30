@@ -1,13 +1,16 @@
 package com.c2v4.greenery.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
+
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Objects;
 
 /**
  * A Entry.
@@ -22,7 +25,7 @@ public class Entry implements Serializable {
     public Entry() {
     }
 
-    public Entry(@NotNull Float value, @NotNull String label, @NotNull Instant date) {
+    public Entry(@NotNull Float value, @NotNull Label label, @NotNull Instant date) {
         this.value = value;
         this.label = label;
         this.date = date;
@@ -33,17 +36,17 @@ public class Entry implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-
+    @NotNull
     @Column(name = "jhi_value", nullable = false)
     private Float value;
 
     @NotNull
-    @Column(name = "jhi_label", nullable = false)
-    private String label;
-
-    @NotNull
     @Column(name = "jhi_date", nullable = false)
     private Instant date;
+
+    @ManyToOne
+    @JsonIgnoreProperties("entries")
+    private Label label;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -67,19 +70,6 @@ public class Entry implements Serializable {
         this.value = value;
     }
 
-    public String getLabel() {
-        return label;
-    }
-
-    public Entry label(String label) {
-        this.label = label;
-        return this;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
     public Instant getDate() {
         return date;
     }
@@ -91,6 +81,19 @@ public class Entry implements Serializable {
 
     public void setDate(Instant date) {
         this.date = date;
+    }
+
+    public Label getLabel() {
+        return label;
+    }
+
+    public Entry label(Label label) {
+        this.label = label;
+        return this;
+    }
+
+    public void setLabel(Label label) {
+        this.label = label;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -115,7 +118,6 @@ public class Entry implements Serializable {
         return "Entry{" +
             "id=" + getId() +
             ", value=" + getValue() +
-            ", label='" + getLabel() + "'" +
             ", date='" + getDate() + "'" +
             "}";
     }

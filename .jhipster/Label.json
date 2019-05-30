@@ -1,0 +1,40 @@
+{
+    "name": "Label",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "schedulerConfig",
+            "otherEntityRelationshipName": "label",
+            "relationshipName": "schedulerConfig",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "numeric",
+            "otherEntityRelationshipName": "label",
+            "relationshipName": "numeric",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "entry",
+            "otherEntityRelationshipName": "label",
+            "relationshipName": "entry"
+        }
+    ],
+    "changelogDate": "20190530194114",
+    "entityTableName": "label",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

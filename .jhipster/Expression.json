@@ -1,0 +1,44 @@
+{
+    "name": "Expression",
+    "fields": [
+        {
+            "fieldName": "exressionLogic",
+            "fieldType": "ExpressionLogic",
+            "fieldValues": "LESS,LESS_OR_EQUAL,EQUAL,GREATER_OR_EQUAL,GREATER"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "numeric",
+            "otherEntityRelationshipName": "expression",
+            "relationshipName": "left",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "numeric",
+            "otherEntityRelationshipName": "expression",
+            "relationshipName": "right",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "predicate",
+            "otherEntityRelationshipName": "expression",
+            "relationshipName": "predicate",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20190530194119",
+    "entityTableName": "expression",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

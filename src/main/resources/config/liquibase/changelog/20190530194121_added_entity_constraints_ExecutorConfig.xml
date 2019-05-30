@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity ExecutorConfig.
+    -->
+    <changeSet id="20190530194121-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="executor_label_id"
+                                 baseTableName="executor_config"
+                                 constraintName="fk_executor_config_executor_label_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="executor_label"/>
+
+    </changeSet>
+</databaseChangeLog>

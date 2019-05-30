@@ -9,13 +9,6 @@
             ]
         },
         {
-            "fieldName": "label",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "date",
             "fieldType": "Instant",
             "fieldValidateRules": [
@@ -23,7 +16,15 @@
             ]
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "label",
+            "otherEntityRelationshipName": "entry",
+            "relationshipName": "label",
+            "otherEntityField": "id"
+        }
+    ],
     "changelogDate": "20190526144420",
     "entityTableName": "entry",
     "dto": "no",

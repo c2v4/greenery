@@ -18,11 +18,9 @@
             <column name="jhi_type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-
-            <column name="name" type="varchar(255)">
-                <constraints nullable="false" />
+            <column name="label_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_scheduler_config_label_id" />
             </column>
-
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
 
@@ -44,7 +42,6 @@
                   context="dev">
             <column name="id" type="numeric"/>
             <column name="jhi_type" type="string"/>
-            <column name="name" type="string"/>
         </loadData>
     </changeSet>
 

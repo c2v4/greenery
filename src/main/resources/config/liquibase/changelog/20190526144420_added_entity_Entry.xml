@@ -19,12 +19,12 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="jhi_label" type="varchar(255)">
+            <column name="jhi_date" type="datetime">
                 <constraints nullable="false" />
             </column>
 
-            <column name="jhi_date" type="datetime">
-                <constraints nullable="false" />
+            <column name="label_id" type="bigint">
+                <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
@@ -41,18 +41,17 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <!--<changeSet id="20190526144420-1-data" author="jhipster" context="faker">-->
-        <!--<loadData-->
-                  <!--file="config/liquibase/data/entry.csv"-->
-                  <!--separator=";"-->
-                  <!--tableName="entry"-->
-                  <!--context="dev">-->
-            <!--<column name="id" type="numeric"/>-->
-            <!--<column name="jhi_value" type="numeric"/>-->
-            <!--<column name="jhi_label" type="string"/>-->
-            <!--<column name="jhi_date" type="date"/>-->
-        <!--</loadData>-->
-    <!--</changeSet>-->
+    <changeSet id="20190526144420-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/data/entry.csv"
+                  separator=";"
+                  tableName="entry"
+                  context="dev">
+            <column name="id" type="numeric"/>
+            <column name="jhi_value" type="numeric"/>
+            <column name="jhi_date" type="date"/>
+        </loadData>
+    </changeSet>
 
     <changeSet id="20190526144420-1-relations" author="jhipster">
 

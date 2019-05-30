@@ -1,0 +1,52 @@
+{
+    "name": "Predicate",
+    "fields": [
+        {
+            "fieldName": "predicateLogic",
+            "fieldType": "PredicateLogic",
+            "fieldValues": "AND,OR,JUST",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "expression",
+            "otherEntityRelationshipName": "predicate",
+            "relationshipName": "expression",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "predicate",
+            "otherEntityRelationshipName": "predicate",
+            "relationshipName": "predicate"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "rule",
+            "otherEntityRelationshipName": "predicate",
+            "relationshipName": "rule",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "predicate",
+            "otherEntityRelationshipName": "predicate",
+            "relationshipName": "predicate",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190530194118",
+    "entityTableName": "predicate",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

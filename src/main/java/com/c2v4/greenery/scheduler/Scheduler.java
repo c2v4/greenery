@@ -1,13 +1,15 @@
 package com.c2v4.greenery.scheduler;
 
+import com.c2v4.greenery.domain.Label;
+
 import java.util.function.Supplier;
 
 public class Scheduler {
 
-    private final String label;
+    private final Label label;
     private final Supplier<Float> supplier;
 
-    public Scheduler(String label, Supplier<Float> supplier) {
+    public Scheduler(Label label, Supplier<Float> supplier) {
         this.label = label;
         this.supplier = supplier;
     }
@@ -16,7 +18,7 @@ public class Scheduler {
         return supplier.get();
     }
 
-    public String getLabel() {
+    public Label getLabel() {
         return label;
     }
 

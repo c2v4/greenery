@@ -1,0 +1,39 @@
+{
+    "name": "Rule",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "predicate",
+            "otherEntityRelationshipName": "rule",
+            "relationshipName": "predicate",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "numeric",
+            "otherEntityRelationshipName": "rule",
+            "relationshipName": "value",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "executorLabel",
+            "otherEntityRelationshipName": "rule",
+            "relationshipName": "executor",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20190530194117",
+    "entityTableName": "rule",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -34,11 +34,11 @@ public class SchedulerConfig implements Serializable {
     @Column(name = "jhi_type", nullable = false)
     private String type;
 
-    @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Label label;
 
-    @OneToMany(mappedBy = "schedulerConfig",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "schedulerConfig")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Property> properties = new HashSet<>();
 
@@ -64,17 +64,17 @@ public class SchedulerConfig implements Serializable {
         this.type = type;
     }
 
-    public String getName() {
-        return name;
+    public Label getLabel() {
+        return label;
     }
 
-    public SchedulerConfig name(String name) {
-        this.name = name;
+    public SchedulerConfig label(Label label) {
+        this.label = label;
         return this;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLabel(Label label) {
+        this.label = label;
     }
 
     public Set<Property> getProperties() {
@@ -128,7 +128,7 @@ public class SchedulerConfig implements Serializable {
         return "SchedulerConfig{" +
             "id=" + getId() +
             ", type='" + getType() + "'" +
-            ", name='" + getName() + "'" +
+            ", name='" + getLabel() + "'" +
             ", properties='" + getProperties() + "'" +
             "}";
     }

@@ -37,6 +37,10 @@ public class Property implements Serializable {
     @JsonIgnoreProperties("properties")
     private SchedulerConfig schedulerConfig;
 
+    @ManyToOne
+    @JsonIgnoreProperties("properties")
+    private ExecutorConfig executorConfig;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -83,6 +87,19 @@ public class Property implements Serializable {
 
     public void setSchedulerConfig(SchedulerConfig schedulerConfig) {
         this.schedulerConfig = schedulerConfig;
+    }
+
+    public ExecutorConfig getExecutorConfig() {
+        return executorConfig;
+    }
+
+    public Property executorConfig(ExecutorConfig executorConfig) {
+        this.executorConfig = executorConfig;
+        return this;
+    }
+
+    public void setExecutorConfig(ExecutorConfig executorConfig) {
+        this.executorConfig = executorConfig;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

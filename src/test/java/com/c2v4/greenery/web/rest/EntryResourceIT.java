@@ -38,9 +38,6 @@ public class EntryResourceIT {
     private static final Float DEFAULT_VALUE = 1F;
     private static final Float UPDATED_VALUE = 2F;
 
-    private static final String DEFAULT_LABEL = "AAAAAAAAAA";
-    private static final String UPDATED_LABEL = "BBBBBBBBBB";
-
     private static final Instant DEFAULT_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -87,7 +84,6 @@ public class EntryResourceIT {
     public static Entry createEntity(EntityManager em) {
         Entry entry = new Entry()
             .value(DEFAULT_VALUE)
-            .label(DEFAULT_LABEL)
             .date(DEFAULT_DATE);
         return entry;
     }
@@ -100,7 +96,6 @@ public class EntryResourceIT {
     public static Entry createUpdatedEntity(EntityManager em) {
         Entry entry = new Entry()
             .value(UPDATED_VALUE)
-            .label(UPDATED_LABEL)
             .date(UPDATED_DATE);
         return entry;
     }
@@ -126,7 +121,6 @@ public class EntryResourceIT {
         assertThat(entryList).hasSize(databaseSizeBeforeCreate + 1);
         Entry testEntry = entryList.get(entryList.size() - 1);
         assertThat(testEntry.getValue()).isEqualTo(DEFAULT_VALUE);
-        assertThat(testEntry.getLabel()).isEqualTo(DEFAULT_LABEL);
         assertThat(testEntry.getDate()).isEqualTo(DEFAULT_DATE);
     }
 
@@ -150,13 +144,12 @@ public class EntryResourceIT {
     }
 
 
-
     @Test
     @Transactional
-    public void checkLabelIsRequired() throws Exception {
+    public void checkValueIsRequired() throws Exception {
         int databaseSizeBeforeTest = entryRepository.findAll().size();
         // set the field null
-        entry.setLabel(null);
+        entry.setValue(null);
 
         // Create the Entry, which fails.
 
@@ -199,7 +192,6 @@ public class EntryResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(entry.getId().intValue())))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.doubleValue())))
-            .andExpect(jsonPath("$.[*].label").value(hasItem(DEFAULT_LABEL.toString())))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())));
     }
     
@@ -215,7 +207,6 @@ public class EntryResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(entry.getId().intValue()))
             .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.doubleValue()))
-            .andExpect(jsonPath("$.label").value(DEFAULT_LABEL.toString()))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()));
     }
 
@@ -241,7 +232,6 @@ public class EntryResourceIT {
         em.detach(updatedEntry);
         updatedEntry
             .value(UPDATED_VALUE)
-            .label(UPDATED_LABEL)
             .date(UPDATED_DATE);
 
         restEntryMockMvc.perform(put("/api/entries")
@@ -254,7 +244,6 @@ public class EntryResourceIT {
         assertThat(entryList).hasSize(databaseSizeBeforeUpdate);
         Entry testEntry = entryList.get(entryList.size() - 1);
         assertThat(testEntry.getValue()).isEqualTo(UPDATED_VALUE);
-        assertThat(testEntry.getLabel()).isEqualTo(UPDATED_LABEL);
         assertThat(testEntry.getDate()).isEqualTo(UPDATED_DATE);
     }
 

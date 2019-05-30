@@ -36,9 +36,6 @@ public class SchedulerConfigResourceIT {
     private static final String DEFAULT_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_TYPE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
-
     @Autowired
     private SchedulerConfigRepository schedulerConfigRepository;
 
@@ -81,8 +78,7 @@ public class SchedulerConfigResourceIT {
      */
     public static SchedulerConfig createEntity(EntityManager em) {
         SchedulerConfig schedulerConfig = new SchedulerConfig()
-            .type(DEFAULT_TYPE)
-            .name(DEFAULT_NAME);
+            .type(DEFAULT_TYPE);
         return schedulerConfig;
     }
     /**
@@ -93,8 +89,7 @@ public class SchedulerConfigResourceIT {
      */
     public static SchedulerConfig createUpdatedEntity(EntityManager em) {
         SchedulerConfig schedulerConfig = new SchedulerConfig()
-            .type(UPDATED_TYPE)
-            .name(UPDATED_NAME);
+            .type(UPDATED_TYPE);
         return schedulerConfig;
     }
 
@@ -119,7 +114,6 @@ public class SchedulerConfigResourceIT {
         assertThat(schedulerConfigList).hasSize(databaseSizeBeforeCreate + 1);
         SchedulerConfig testSchedulerConfig = schedulerConfigList.get(schedulerConfigList.size() - 1);
         assertThat(testSchedulerConfig.getType()).isEqualTo(DEFAULT_TYPE);
-        assertThat(testSchedulerConfig.getName()).isEqualTo(DEFAULT_NAME);
     }
 
     @Test
@@ -162,24 +156,6 @@ public class SchedulerConfigResourceIT {
 
     @Test
     @Transactional
-    public void checkNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = schedulerConfigRepository.findAll().size();
-        // set the field null
-        schedulerConfig.setName(null);
-
-        // Create the SchedulerConfig, which fails.
-
-        restSchedulerConfigMockMvc.perform(post("/api/scheduler-configs")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(schedulerConfig)))
-            .andExpect(status().isBadRequest());
-
-        List<SchedulerConfig> schedulerConfigList = schedulerConfigRepository.findAll();
-        assertThat(schedulerConfigList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllSchedulerConfigs() throws Exception {
         // Initialize the database
         schedulerConfigRepository.saveAndFlush(schedulerConfig);
@@ -189,8 +165,7 @@ public class SchedulerConfigResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(schedulerConfig.getId().intValue())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
     
     @Test
@@ -204,8 +179,7 @@ public class SchedulerConfigResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(schedulerConfig.getId().intValue()))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
     }
 
     @Test
@@ -229,8 +203,7 @@ public class SchedulerConfigResourceIT {
         // Disconnect from session so that the updates on updatedSchedulerConfig are not directly saved in db
         em.detach(updatedSchedulerConfig);
         updatedSchedulerConfig
-            .type(UPDATED_TYPE)
-            .name(UPDATED_NAME);
+            .type(UPDATED_TYPE);
 
         restSchedulerConfigMockMvc.perform(put("/api/scheduler-configs")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -242,7 +215,6 @@ public class SchedulerConfigResourceIT {
         assertThat(schedulerConfigList).hasSize(databaseSizeBeforeUpdate);
         SchedulerConfig testSchedulerConfig = schedulerConfigList.get(schedulerConfigList.size() - 1);
         assertThat(testSchedulerConfig.getType()).isEqualTo(UPDATED_TYPE);
-        assertThat(testSchedulerConfig.getName()).isEqualTo(UPDATED_NAME);
     }
 
     @Test

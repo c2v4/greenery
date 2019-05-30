@@ -1,0 +1,34 @@
+{
+    "name": "ExecutorConfig",
+    "fields": [
+        {
+            "fieldName": "type",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "executorLabel",
+            "otherEntityRelationshipName": "executorConfig",
+            "relationshipName": "executorLabel",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "property",
+            "otherEntityRelationshipName": "executorConfig",
+            "relationshipName": "property"
+        }
+    ],
+    "changelogDate": "20190530194121",
+    "entityTableName": "executor_config",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="scheduler_config"/>
 
+        <addForeignKeyConstraint baseColumnNames="executor_config_id"
+                                 baseTableName="property"
+                                 constraintName="fk_property_executor_config_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="executor_config"/>
+
     </changeSet>
 </databaseChangeLog>

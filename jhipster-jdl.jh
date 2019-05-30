@@ -1,12 +1,14 @@
 entity Entry {
 	value Float required,
-    label String required,
     date Instant required
+}
+
+entity Label {
+	name String
 }
 
 entity SchedulerConfig{
 	type String required,
-    name String required,
 }
 
 entity Property{
@@ -14,6 +16,73 @@ entity Property{
     value String
 }
 
+entity Rule{
+}
+
+entity Predicate{
+	predicateLogic PredicateLogic required
+}
+
+enum PredicateLogic{
+AND,
+OR,
+JUST
+}
+
+entity Expression{
+	exressionLogic ExpressionLogic
+}
+
+enum ExpressionLogic{
+LESS,
+LESS_OR_EQUAL,
+EQUAL,
+GREATER_OR_EQUAL,
+GREATER
+}
+
+entity Numeric{
+	value Float
+    operation Operation
+}
+
+enum Operation{
+ADD,
+SUBTRACT,
+MULTIPLY,
+DIVIDE,
+MAX,
+MIN
+}
+
+entity ExecutorConfig{
+	type String
+}
+
+entity ExecutorLabel{
+	name String
+}
+
 relationship OneToMany{
 	SchedulerConfig to Property
+    ExecutorConfig to Property
+    Predicate to Predicate
+}
+
+relationship OneToOne{
+	Rule to Predicate
+	SchedulerConfig to Label
+    Predicate to Expression
+    Expression{left} to Numeric
+    Expression{right} to Numeric
+    Numeric{left} to Numeric
+    Numeric{right} to Numeric
+    Numeric to Label
+    Rule{value} to Numeric
+    Rule{executor} to ExecutorLabel
+    ExecutorConfig to ExecutorLabel
+}
+
+relationship ManyToOne{
+	Entry to Label
 }

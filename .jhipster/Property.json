@@ -20,6 +20,13 @@
             "otherEntityRelationshipName": "property",
             "relationshipName": "schedulerConfig",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "executorConfig",
+            "otherEntityRelationshipName": "property",
+            "relationshipName": "executorConfig",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20190530064022",
