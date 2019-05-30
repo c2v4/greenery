@@ -2,7 +2,7 @@ dependencies {
     testImplementation "com.h2database:h2"
 }
 
-def profiles = "prod,postgres"
+def profiles = "prod"
 if (project.hasProperty("no-liquibase")) {
     profiles += ",no-liquibase"
 }
@@ -19,6 +19,13 @@ bootRun {
     args = []
 }
 
+task webpack_test(type: NpmTask, dependsOn: "npmInstall") {
+    args = ["run", "webpack:test"]
+}
+
+task webpack(type: NpmTask, dependsOn: "npmInstall") {
+    args = ["run", "webpack:prod"]
+}
 
 processResources {
     filesMatching("**/application.yml") {
@@ -41,3 +48,6 @@ gitProperties {
     keys = ["git.branch", "git.commit.id.abbrev", "git.commit.id.describe"]
 }
 
+test.dependsOn webpack_test
+processResources.dependsOn webpack
+bootJar.dependsOn processResources

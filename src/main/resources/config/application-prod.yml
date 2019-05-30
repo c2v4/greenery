@@ -26,9 +26,6 @@ management:
         enabled: false
 
 spring:
-  profiles:
-      include:
-        - postgres
   devtools:
     restart:
       enabled: false
@@ -38,7 +35,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/greenery
     username: greenery
-    password: greenery123
+    password:
     hikari:
       poolName: Hikari
       auto-commit: false

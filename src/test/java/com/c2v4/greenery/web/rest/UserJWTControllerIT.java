@@ -1,6 +1,8 @@
 package com.c2v4.greenery.web.rest;
 
 import com.c2v4.greenery.GreeneryApp;
+import com.c2v4.greenery.domain.User;
+import com.c2v4.greenery.repository.UserRepository;
 import com.c2v4.greenery.security.jwt.TokenProvider;
 import com.c2v4.greenery.web.rest.errors.ExceptionTranslator;
 import com.c2v4.greenery.web.rest.vm.LoginVM;
@@ -9,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +37,12 @@ public class UserJWTControllerIT {
     private AuthenticationManagerBuilder authenticationManager;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private ExceptionTranslator exceptionTranslator;
 
     private MockMvc mockMvc;
@@ -47,9 +56,18 @@ public class UserJWTControllerIT {
     }
 
     @Test
+    @Transactional
     public void testAuthorize() throws Exception {
+        User user = new User();
+        user.setLogin("user-jwt-controller");
+        user.setEmail("user-jwt-controller@example.com");
+        user.setActivated(true);
+        user.setPassword(passwordEncoder.encode("test"));
+
+        userRepository.saveAndFlush(user);
+
         LoginVM login = new LoginVM();
-        login.setUsername("test");
+        login.setUsername("user-jwt-controller");
         login.setPassword("test");
         mockMvc.perform(post("/api/authenticate")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -62,9 +80,18 @@ public class UserJWTControllerIT {
     }
 
     @Test
+    @Transactional
     public void testAuthorizeWithRememberMe() throws Exception {
+        User user = new User();
+        user.setLogin("user-jwt-controller-remember-me");
+        user.setEmail("user-jwt-controller-remember-me@example.com");
+        user.setActivated(true);
+        user.setPassword(passwordEncoder.encode("test"));
+
+        userRepository.saveAndFlush(user);
+
         LoginVM login = new LoginVM();
-        login.setUsername("test");
+        login.setUsername("user-jwt-controller-remember-me");
         login.setPassword("test");
         login.setRememberMe(true);
         mockMvc.perform(post("/api/authenticate")

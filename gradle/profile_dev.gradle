@@ -3,7 +3,7 @@ dependencies {
     implementation "com.h2database:h2"
 }
 
-def profiles = "dev,postgres"
+def profiles = "dev"
 if (project.hasProperty("no-liquibase")) {
     profiles += ",no-liquibase"
 }
@@ -23,6 +23,19 @@ bootRun {
     args = []
 }
 
+task webpackBuildDev(type: NpmTask) {
+    inputs.files("package-lock.json")
+    inputs.dir("src/main/webapp/")
+
+    def webpackDevFiles = fileTree("webpack//")
+    webpackDevFiles.exclude("webpack.prod.js")
+    inputs.files(webpackDevFiles)
+
+    outputs.dir("build/resources/main/static/")
+
+    dependsOn npmInstall
+    args = ["run", "webpack:build"]
+}
 
 processResources {
     filesMatching("**/application.yml") {
@@ -35,3 +48,5 @@ processResources {
     }
 }
 
+processResources.dependsOn webpackBuildDev
+bootJar.dependsOn processResources

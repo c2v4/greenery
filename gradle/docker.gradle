@@ -3,7 +3,7 @@ jib {
         image = "adoptopenjdk/openjdk11:alpine-jre"
     }
     to {
-        image = "c2v4/greenery:latest"
+        image = "greenery:latest"
     }
     container {
         entrypoint = ["sh", "-c", "chmod +x /entrypoint.sh && sync && /entrypoint.sh"]

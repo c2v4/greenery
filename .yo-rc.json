@@ -29,7 +29,8 @@
     "otherModules": [],
     "enableTranslation": false,
     "clientPackageManager": "npm",
-    "skipClient": true,
-    "skipUserManagement": true
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "useSass": true
   }
 }
