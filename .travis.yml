@@ -37,11 +37,11 @@ script:
   - python <(curl https://raw.githubusercontent.com/tomato-bot/tomato/master/tomato-lib/tomato_lib.py) build/test-results/*/TEST*.xml
   - ./gradlew sonarqube -Dsonar.projectKey=c2v4_greenery -Dsonar.organization=c2v4-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.branch.name=$TRAVIS_BRANCH
   - ./gradlew bootJar -Pprod -x test
-  - test $TRAVIS_BRANCH = "master" && ./gradlew jibDockerBuild -Pprod
-  - test $TRAVIS_BRANCH = "master" && ./gradlew jibDockerBuild -Pprod -Praspberry
-  - test $TRAVIS_BRANCH = "master" && echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - test $TRAVIS_BRANCH = "master" && docker push c2v4/greenery
-  - test $TRAVIS_BRANCH = "master" && docker push c2v4/greenery-raspberry
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then ./gradlew jibDockerBuild -Pprod ; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then ./gradlew jibDockerBuild -Pprod -Praspberry ; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then docker push c2v4/greenery ; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then docker push c2v4/greenery-raspberry ; fi
 notifications:
   webhooks:
     on_success: change # options: [always|never|change] default: always
