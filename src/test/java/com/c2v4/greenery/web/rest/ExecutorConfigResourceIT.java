@@ -33,9 +33,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = GreeneryApp.class)
 public class ExecutorConfigResourceIT {
 
-    private static final String DEFAULT_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_TYPE = "BBBBBBBBBB";
-
     @Autowired
     private ExecutorConfigRepository executorConfigRepository;
 
@@ -77,8 +74,7 @@ public class ExecutorConfigResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ExecutorConfig createEntity(EntityManager em) {
-        ExecutorConfig executorConfig = new ExecutorConfig()
-            .type(DEFAULT_TYPE);
+        ExecutorConfig executorConfig = new ExecutorConfig();
         return executorConfig;
     }
     /**
@@ -88,8 +84,7 @@ public class ExecutorConfigResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static ExecutorConfig createUpdatedEntity(EntityManager em) {
-        ExecutorConfig executorConfig = new ExecutorConfig()
-            .type(UPDATED_TYPE);
+        ExecutorConfig executorConfig = new ExecutorConfig();
         return executorConfig;
     }
 
@@ -113,7 +108,6 @@ public class ExecutorConfigResourceIT {
         List<ExecutorConfig> executorConfigList = executorConfigRepository.findAll();
         assertThat(executorConfigList).hasSize(databaseSizeBeforeCreate + 1);
         ExecutorConfig testExecutorConfig = executorConfigList.get(executorConfigList.size() - 1);
-        assertThat(testExecutorConfig.getType()).isEqualTo(DEFAULT_TYPE);
     }
 
     @Test
@@ -146,8 +140,7 @@ public class ExecutorConfigResourceIT {
         restExecutorConfigMockMvc.perform(get("/api/executor-configs?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(executorConfig.getId().intValue())))
-            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(executorConfig.getId().intValue())));
     }
     
     @Test
@@ -160,8 +153,7 @@ public class ExecutorConfigResourceIT {
         restExecutorConfigMockMvc.perform(get("/api/executor-configs/{id}", executorConfig.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(executorConfig.getId().intValue()))
-            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
+            .andExpect(jsonPath("$.id").value(executorConfig.getId().intValue()));
     }
 
     @Test
@@ -184,8 +176,6 @@ public class ExecutorConfigResourceIT {
         ExecutorConfig updatedExecutorConfig = executorConfigRepository.findById(executorConfig.getId()).get();
         // Disconnect from session so that the updates on updatedExecutorConfig are not directly saved in db
         em.detach(updatedExecutorConfig);
-        updatedExecutorConfig
-            .type(UPDATED_TYPE);
 
         restExecutorConfigMockMvc.perform(put("/api/executor-configs")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -196,7 +186,6 @@ public class ExecutorConfigResourceIT {
         List<ExecutorConfig> executorConfigList = executorConfigRepository.findAll();
         assertThat(executorConfigList).hasSize(databaseSizeBeforeUpdate);
         ExecutorConfig testExecutorConfig = executorConfigList.get(executorConfigList.size() - 1);
-        assertThat(testExecutorConfig.getType()).isEqualTo(UPDATED_TYPE);
     }
 
     @Test

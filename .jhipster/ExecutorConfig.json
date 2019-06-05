@@ -1,11 +1,6 @@
 {
     "name": "ExecutorConfig",
-    "fields": [
-        {
-            "fieldName": "type",
-            "fieldType": "String"
-        }
-    ],
+    "fields": [],
     "relationships": [
         {
             "relationshipType": "one-to-one",
@@ -20,6 +15,13 @@
             "otherEntityName": "property",
             "otherEntityRelationshipName": "executorConfig",
             "relationshipName": "property"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "executorType",
+            "otherEntityRelationshipName": "executorConfig",
+            "relationshipName": "executorType",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20190530204017",

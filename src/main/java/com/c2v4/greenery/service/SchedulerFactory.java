@@ -17,8 +17,8 @@ public class SchedulerFactory {
     }
 
     public Scheduler createScheduler(SchedulerConfig config) {
-        ProviderFactory providerFactory = providers.get(config.getType());
-        if(providerFactory == null) throw new IllegalArgumentException("Cannot find provider for type:"+config.getType());
+        ProviderFactory providerFactory = providers.get(config.getSchedulerType().getName());
+        if(providerFactory == null) throw new IllegalArgumentException("Cannot find provider for type:"+config.getSchedulerType().getName());
         return new Scheduler(config.getLabel(), providerFactory.create(config));
     }
 }

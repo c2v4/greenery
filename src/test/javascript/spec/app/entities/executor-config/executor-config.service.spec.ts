@@ -23,7 +23,7 @@ describe('Service Tests', () => {
       service = injector.get(ExecutorConfigService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new ExecutorConfig(0, 'AAAAAAA');
+      elemDefault = new ExecutorConfig(0);
     });
 
     describe('Service methods', () => {
@@ -57,12 +57,7 @@ describe('Service Tests', () => {
       });
 
       it('should update a ExecutorConfig', async () => {
-        const returnedFromService = Object.assign(
-          {
-            type: 'BBBBBB'
-          },
-          elemDefault
-        );
+        const returnedFromService = Object.assign({}, elemDefault);
 
         const expected = Object.assign({}, returnedFromService);
         service
@@ -75,12 +70,7 @@ describe('Service Tests', () => {
       });
 
       it('should return a list of ExecutorConfig', async () => {
-        const returnedFromService = Object.assign(
-          {
-            type: 'BBBBBB'
-          },
-          elemDefault
-        );
+        const returnedFromService = Object.assign({}, elemDefault);
         const expected = Object.assign({}, returnedFromService);
         service
           .query(expected)

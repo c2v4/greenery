@@ -8,7 +8,10 @@ entity Label {
 }
 
 entity SchedulerConfig{
-	type String required,
+}
+
+entity SchedulerType{
+	name String
 }
 
 entity Property{
@@ -56,7 +59,11 @@ MIN
 }
 
 entity ExecutorConfig{
-	type String
+
+}
+
+entity ExecutorType{
+	name String
 }
 
 entity ExecutorLabel{
@@ -85,4 +92,6 @@ relationship OneToOne{
 
 relationship ManyToOne{
 	Entry to Label
+    SchedulerConfig to SchedulerType
+    ExecutorConfig to ExecutorType
 }

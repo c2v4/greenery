@@ -9,6 +9,8 @@ import { IExecutorConfig, ExecutorConfig } from 'app/shared/model/executor-confi
 import { ExecutorConfigService } from './executor-config.service';
 import { IExecutorLabel } from 'app/shared/model/executor-label.model';
 import { ExecutorLabelService } from 'app/entities/executor-label';
+import { IExecutorType } from 'app/shared/model/executor-type.model';
+import { ExecutorTypeService } from 'app/entities/executor-type';
 
 @Component({
   selector: 'jhi-executor-config-update',
@@ -20,16 +22,19 @@ export class ExecutorConfigUpdateComponent implements OnInit {
 
   executorlabels: IExecutorLabel[];
 
+  executortypes: IExecutorType[];
+
   editForm = this.fb.group({
     id: [],
-    type: [],
-    executorLabel: []
+    executorLabel: [],
+    executorType: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected executorConfigService: ExecutorConfigService,
     protected executorLabelService: ExecutorLabelService,
+    protected executorTypeService: ExecutorTypeService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -65,13 +70,20 @@ export class ExecutorConfigUpdateComponent implements OnInit {
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
+    this.executorTypeService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IExecutorType[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IExecutorType[]>) => response.body)
+      )
+      .subscribe((res: IExecutorType[]) => (this.executortypes = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(executorConfig: IExecutorConfig) {
     this.editForm.patchValue({
       id: executorConfig.id,
-      type: executorConfig.type,
-      executorLabel: executorConfig.executorLabel
+      executorLabel: executorConfig.executorLabel,
+      executorType: executorConfig.executorType
     });
   }
 
@@ -93,8 +105,8 @@ export class ExecutorConfigUpdateComponent implements OnInit {
     const entity = {
       ...new ExecutorConfig(),
       id: this.editForm.get(['id']).value,
-      type: this.editForm.get(['type']).value,
-      executorLabel: this.editForm.get(['executorLabel']).value
+      executorLabel: this.editForm.get(['executorLabel']).value,
+      executorType: this.editForm.get(['executorType']).value
     };
     return entity;
   }
@@ -116,6 +128,10 @@ export class ExecutorConfigUpdateComponent implements OnInit {
   }
 
   trackExecutorLabelById(index: number, item: IExecutorLabel) {
+    return item.id;
+  }
+
+  trackExecutorTypeById(index: number, item: IExecutorType) {
     return item.id;
   }
 }
