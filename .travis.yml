@@ -39,9 +39,9 @@ script:
   - ./gradlew bootJar -Pprod -x test
   - if [ "$TRAVIS_BRANCH" = "master" ]; then ./gradlew jibDockerBuild -Pprod ; fi
   - if [ "$TRAVIS_BRANCH" = "master" ]; then ./gradlew jibDockerBuild -Pprod -Praspberry ; fi
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ; fi
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then docker push c2v4/greenery ; fi
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then docker push c2v4/greenery-raspberry ; fi
+  - if [ "$TRAVIS_BRANCH" = "master" && "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ; fi
+  - if [ "$TRAVIS_BRANCH" = "master" && "$TRAVIS_PULL_REQUEST" != "false" ]; then docker push c2v4/greenery ; fi
+  - if [ "$TRAVIS_BRANCH" = "master" && "$TRAVIS_PULL_REQUEST" != "false" ]; then docker push c2v4/greenery-raspberry ; fi
 notifications:
   webhooks:
     on_success: change # options: [always|never|change] default: always
