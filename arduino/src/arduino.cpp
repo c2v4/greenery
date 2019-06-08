@@ -3,7 +3,6 @@
 void setup() {
   // initialize digital pin LED_BUILTIN as an output.
   Serial.begin(9600);
-  Serial.setTimeout(10000);
 }
 
 void unknown(char *command) {
