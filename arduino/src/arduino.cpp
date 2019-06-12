@@ -16,30 +16,25 @@ void loop() {
     case 'r': {
       pinMode(pin, INPUT_PULLUP);
       Serial.println(digitalRead(pin));
-      success(mode, pin, state, received);
       break;
     }
     case 'l': {
       pinMode(pin, INPUT_PULLUP);
       Serial.println(analogRead(pin));
-      success(mode, pin, state, received);
       break;
     }
     case '2': {
       dht22(pin);
-      success(mode, pin, state, received);
       break;
     }
     case 'd': {
       pinMode(pin, OUTPUT);
       digitalWrite(pin, state);
-      success(mode, pin, state, received);
       break;
     }
     case 'a': {
       pinMode(pin, OUTPUT);
       analogWrite(pin, state);
-      success(mode, pin, state, received);
       break;
     }
     case '8': {
@@ -50,7 +45,6 @@ void loop() {
       } else {
         scanOW(pin);
       }
-      success(mode, pin, state, received);
       break;
     }
     default: {

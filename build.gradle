@@ -233,6 +233,7 @@ dependencies {
     }
     implementation "io.springfox:springfox-bean-validators"
     implementation "org.postgresql:postgresql"
+    compile 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
     liquibaseRuntime "org.postgresql:postgresql"
     implementation "org.mapstruct:mapstruct:${mapstruct_version}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
