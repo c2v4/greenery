@@ -25,6 +25,10 @@ management:
       prometheus:
         enabled: false
 
+application:
+  serial:
+    port: '/dev/ttyACM0'
+
 spring:
   devtools:
     restart:
