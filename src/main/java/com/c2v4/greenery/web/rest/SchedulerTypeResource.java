@@ -19,8 +19,6 @@ public class SchedulerTypeResource {
 
     private final Logger log = LoggerFactory.getLogger(SchedulerTypeResource.class);
 
-    private static final String ENTITY_NAME = "schedulerType";
-
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
