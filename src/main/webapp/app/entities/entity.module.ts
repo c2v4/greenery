@@ -59,6 +59,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'executor-type',
         loadChildren: './executor-type/executor-type.module#GreeneryExecutorTypeModule'
+      },
+      {
+        path: 'scheduler-config',
+        loadChildren: './scheduler-config/scheduler-config.module#GreenerySchedulerConfigModule'
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

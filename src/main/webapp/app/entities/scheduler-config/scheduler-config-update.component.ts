@@ -9,8 +9,6 @@ import { ISchedulerConfig, SchedulerConfig } from 'app/shared/model/scheduler-co
 import { SchedulerConfigService } from './scheduler-config.service';
 import { ILabel } from 'app/shared/model/label.model';
 import { LabelService } from 'app/entities/label';
-import { ISchedulerType } from 'app/shared/model/scheduler-type.model';
-import { SchedulerTypeService } from 'app/entities/scheduler-type';
 
 @Component({
   selector: 'jhi-scheduler-config-update',
@@ -22,19 +20,16 @@ export class SchedulerConfigUpdateComponent implements OnInit {
 
   labels: ILabel[];
 
-  schedulertypes: ISchedulerType[];
-
   editForm = this.fb.group({
     id: [],
-    label: [],
-    schedulerType: []
+    type: [null, [Validators.required]],
+    label: []
   });
 
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected schedulerConfigService: SchedulerConfigService,
     protected labelService: LabelService,
-    protected schedulerTypeService: SchedulerTypeService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -70,20 +65,13 @@ export class SchedulerConfigUpdateComponent implements OnInit {
         },
         (res: HttpErrorResponse) => this.onError(res.message)
       );
-    this.schedulerTypeService
-      .query()
-      .pipe(
-        filter((mayBeOk: HttpResponse<ISchedulerType[]>) => mayBeOk.ok),
-        map((response: HttpResponse<ISchedulerType[]>) => response.body)
-      )
-      .subscribe((res: ISchedulerType[]) => (this.schedulertypes = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(schedulerConfig: ISchedulerConfig) {
     this.editForm.patchValue({
       id: schedulerConfig.id,
-      label: schedulerConfig.label,
-      schedulerType: schedulerConfig.schedulerType
+      type: schedulerConfig.type,
+      label: schedulerConfig.label
     });
   }
 
@@ -105,8 +93,8 @@ export class SchedulerConfigUpdateComponent implements OnInit {
     const entity = {
       ...new SchedulerConfig(),
       id: this.editForm.get(['id']).value,
-      label: this.editForm.get(['label']).value,
-      schedulerType: this.editForm.get(['schedulerType']).value
+      type: this.editForm.get(['type']).value,
+      label: this.editForm.get(['label']).value
     };
     return entity;
   }
@@ -128,10 +116,6 @@ export class SchedulerConfigUpdateComponent implements OnInit {
   }
 
   trackLabelById(index: number, item: ILabel) {
-    return item.id;
-  }
-
-  trackSchedulerTypeById(index: number, item: ISchedulerType) {
     return item.id;
   }
 }

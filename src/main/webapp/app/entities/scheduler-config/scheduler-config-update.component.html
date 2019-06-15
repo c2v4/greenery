@@ -9,19 +9,23 @@
                     <input type="text" class="form-control" id="id" name="id" formControlName="id"
                         readonly />
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_type">Type</label>
+                    <input type="text" class="form-control" name="type" id="field_type"
+                           formControlName="type"/>
+                    <div *ngIf="editForm.get('type').invalid && (editForm.get('type').dirty || editForm.get('type').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('type').errors.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_label">Label</label>
                     <select class="form-control" id="field_label" name="label" formControlName="label">
                         <option [ngValue]="null"></option>
                         <option [ngValue]="labelOption.id === editForm.get('label').value?.id ? editForm.get('label').value : labelOption" *ngFor="let labelOption of labels; trackBy: trackLabelById">{{labelOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_schedulerType">Scheduler Type</label>
-                    <select class="form-control" id="field_schedulerType" name="schedulerType" formControlName="schedulerType">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="schedulerTypeOption.id === editForm.get('schedulerType').value?.id ? editForm.get('schedulerType').value : schedulerTypeOption" *ngFor="let schedulerTypeOption of schedulertypes; trackBy: trackSchedulerTypeById">{{schedulerTypeOption.id}}</option>
                     </select>
                 </div>
             </div>
