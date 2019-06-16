@@ -14,11 +14,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="label"/>
 
-        <addForeignKeyConstraint baseColumnNames="scheduler_type_id"
-                                 baseTableName="scheduler_config"
-                                 constraintName="fk_scheduler_config_scheduler_type_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="scheduler_type"/>
-
     </changeSet>
 </databaseChangeLog>
