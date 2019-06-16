@@ -21,7 +21,6 @@
     <include file="config/liquibase/changelog/20190530204016_added_entity_Numeric.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190530204017_added_entity_ExecutorConfig.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190530204018_added_entity_ExecutorLabel.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20190530214953_added_entity_SchedulerType.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190530215000_added_entity_ExecutorType.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20190530204009_added_entity_constraints_Entry.xml" relativeToChangelogFile="false"/>
