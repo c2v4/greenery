@@ -36,11 +36,9 @@ install:
 script:
   - set -e
   - chmod +x gradlew
-  - ./gradlew clean test jacocoTestReport bootJar
+  - ./gradlew clean test jacocoTestReport bootJar -Pprod
   - python <(curl https://raw.githubusercontent.com/tomato-bot/tomato/master/tomato-lib/tomato_lib.py) build/test-results/test/TEST*.xml
-  # - ./gradlew sonarqube -Dsonar.projectKey=c2v4_greenery -Dsonar.organization=c2v4-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -x test
   - sonar-scanner
-  - ./gradlew bootJar -Pprod -x test
   - if [ "$TRAVIS_BRANCH" = "master" ]; then ./gradlew jibDockerBuild -Pprod ; fi
   - if [ "$TRAVIS_BRANCH" = "master" ]; then ./gradlew jibDockerBuild -Pprod -Praspberry ; fi
   - if [ "$TRAVIS_BRANCH" = "master" && "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ; fi
