@@ -36,7 +36,7 @@ install:
 script:
   - set -e
   - chmod +x gradlew
-  - ./gradlew clean test integrationTest
+  - ./gradlew clean test integrationTest bootJar
   - python <(curl https://raw.githubusercontent.com/tomato-bot/tomato/master/tomato-lib/tomato_lib.py) build/test-results/*/TEST*.xml
   #- ./gradlew sonarqube -Dsonar.projectKey=c2v4_greenery -Dsonar.organization=c2v4-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.branch.name=$TRAVIS_BRANCH -x test
   - sonar-scanner
