@@ -38,7 +38,7 @@ public class SchedulerConfig implements Serializable {
     @JoinColumn(unique = true)
     private Label label;
 
-    @OneToMany(mappedBy = "schedulerConfig")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "schedulerConfig")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Property> properties = new HashSet<>();
 
@@ -104,7 +104,7 @@ public class SchedulerConfig implements Serializable {
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
 
-    public Map<String,String> getProps(){
+    public Map<String, String> getProps() {
         return properties.stream().collect(Collectors.toMap(Property::getKey, Property::getValue));
     }
 
