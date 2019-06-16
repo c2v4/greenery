@@ -13,6 +13,9 @@ cache:
     - node
     - node_modules
     - $HOME/.gradle
+addons:
+  sonarcloud:
+    organization: 'c2v4-github' # the key of the org you chose at step #3
 env:
   global:
     - NODE_VERSION=10.15.3
@@ -35,7 +38,8 @@ script:
   - chmod +x gradlew
   - ./gradlew clean test integrationTest
   - python <(curl https://raw.githubusercontent.com/tomato-bot/tomato/master/tomato-lib/tomato_lib.py) build/test-results/*/TEST*.xml
-  - ./gradlew sonarqube -Dsonar.projectKey=c2v4_greenery -Dsonar.organization=c2v4-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.branch.name=$TRAVIS_BRANCH -x test
+  #- ./gradlew sonarqube -Dsonar.projectKey=c2v4_greenery -Dsonar.organization=c2v4-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.branch.name=$TRAVIS_BRANCH -x test
+  - sonar-scanner
   - ./gradlew bootJar -Pprod -x test
   - if [ "$TRAVIS_BRANCH" = "master" ]; then ./gradlew jibDockerBuild -Pprod ; fi
   - if [ "$TRAVIS_BRANCH" = "master" ]; then ./gradlew jibDockerBuild -Pprod -Praspberry ; fi
