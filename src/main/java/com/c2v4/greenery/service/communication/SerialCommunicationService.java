@@ -4,11 +4,9 @@ import com.c2v4.greenery.config.ApplicationProperties;
 import com.c2v4.greenery.config.ApplicationProperties.Serial;
 import com.c2v4.greenery.service.SchedulerService;
 import com.fazecast.jSerialComm.SerialPort;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Optional;
-import org.springframework.stereotype.Service;
 
 public class SerialCommunicationService implements CommunicationService {
 

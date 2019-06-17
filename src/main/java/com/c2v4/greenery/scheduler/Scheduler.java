@@ -1,7 +1,6 @@
 package com.c2v4.greenery.scheduler;
 
 import com.c2v4.greenery.domain.Label;
-
 import java.util.function.Supplier;
 
 public class Scheduler {

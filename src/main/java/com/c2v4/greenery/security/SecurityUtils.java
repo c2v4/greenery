@@ -1,10 +1,9 @@
 package com.c2v4.greenery.security;
 
+import java.util.Optional;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Optional;
 
 /**
  * Utility class for Spring Security.

@@ -1,10 +1,8 @@
 package com.c2v4.greenery.service.communication;
 
 import java.util.Map;
-import java.util.function.Supplier;
-
 import java.util.Optional;
-import org.springframework.stereotype.Service;
+import java.util.function.Supplier;
 
 public class StubSerialCommunicationService implements CommunicationService {
 
