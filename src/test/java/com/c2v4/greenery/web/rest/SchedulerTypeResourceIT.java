@@ -1,11 +1,16 @@
 package com.c2v4.greenery.web.rest;
 
-import com.c2v4.greenery.GreeneryApp;
-import com.c2v4.greenery.service.SchedulerFactory;
-import com.c2v4.greenery.service.factory.ProviderFactory;
-import com.c2v4.greenery.web.rest.errors.ExceptionTranslator;
+import static com.c2v4.greenery.web.rest.TestUtil.createFormattingConversionService;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.c2v4.greenery.GreeneryApp;
+import com.c2v4.greenery.service.factory.SupplierFactory;
+import com.c2v4.greenery.web.rest.errors.ExceptionTranslator;
 import java.util.Map;
+import javax.persistence.EntityManager;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,19 +21,9 @@ import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
-
-import javax.persistence.EntityManager;
-import java.util.List;
-
-import static com.c2v4.greenery.web.rest.TestUtil.createFormattingConversionService;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@Link SchedulerTypeResource} REST controller.
@@ -37,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class SchedulerTypeResourceIT {
 
     @Autowired
-    private Map<String, ProviderFactory> schedulerTypes;
+    private Map<String, SupplierFactory> schedulerTypes;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
