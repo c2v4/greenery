@@ -1,12 +1,11 @@
-package com.c2v4.greenery.service;
+package com.c2v4.greenery.service.communication;
 
 import java.util.Map;
 import java.util.function.Supplier;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import org.springframework.stereotype.Service;
 
-@Service
 public class StubSerialCommunicationService implements CommunicationService {
 
     private final Map<String,Supplier<String>> stubConfig;

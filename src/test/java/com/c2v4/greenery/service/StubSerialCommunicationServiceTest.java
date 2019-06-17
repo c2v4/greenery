@@ -2,6 +2,7 @@ package com.c2v4.greenery.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.c2v4.greenery.service.communication.StubSerialCommunicationService;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;

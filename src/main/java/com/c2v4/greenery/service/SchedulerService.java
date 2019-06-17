@@ -5,6 +5,7 @@ import com.c2v4.greenery.domain.SchedulerConfig;
 import com.c2v4.greenery.repository.EntryRepository;
 import com.c2v4.greenery.repository.SchedulerConfigRepository;
 import com.c2v4.greenery.scheduler.Scheduler;
+import com.c2v4.greenery.service.communication.CommunicationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
