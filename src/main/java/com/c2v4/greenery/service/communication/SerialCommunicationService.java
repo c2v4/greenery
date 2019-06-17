@@ -1,16 +1,14 @@
-package com.c2v4.greenery.service;
+package com.c2v4.greenery.service.communication;
 
 import com.c2v4.greenery.config.ApplicationProperties;
 import com.c2v4.greenery.config.ApplicationProperties.Serial;
+import com.c2v4.greenery.service.SchedulerService;
 import com.fazecast.jSerialComm.SerialPort;
-
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
-@Service
-public class SerialCommunicationService {
+public class SerialCommunicationService implements CommunicationService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SchedulerService.class);
 
@@ -39,14 +37,23 @@ public class SerialCommunicationService {
         return isAvailable;
     }
 
-    Optional<String> fetchData(String str) {
+    @Override
+    public Optional<String> fetchData(String request) {
+        LOGGER.debug("Fetching data for request: {}", request);
         if (isAvailable && serialPort != null && serialPort.isOpen()) {
-            byte[] bytes = str.getBytes();
+            byte[] bytes = request.getBytes();
             synchronized (this) {
                 serialPort.writeBytes(bytes, bytes.length);
                 byte[] readBuffer = new byte[1024];
                 int numRead = serialPort.readBytes(readBuffer, readBuffer.length);
-                return numRead > 0 ? Optional.of(new String(readBuffer).trim()) : Optional.empty();
+                LOGGER.debug("Read {} bytes", numRead);
+                if (numRead > 0) {
+                    String received = new String(readBuffer).trim();
+                    LOGGER.debug("Received: {}",received);
+                    return Optional.of(received);
+                } else {
+                    return Optional.empty();
+                }
             }
         } else {
             LOGGER.warn("Serial port {} is not available", serialPort);

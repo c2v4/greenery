@@ -1,18 +1,17 @@
 package com.c2v4.greenery.web.rest;
 
-import com.c2v4.greenery.service.factory.ProviderFactory;
 
+import com.c2v4.greenery.service.factory.SupplierFactory;
 import java.util.Map;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-/**
- * REST controller for managing {@link com.c2v4.greenery.domain.SchedulerType}.
- */
 @RestController
 @RequestMapping("/api")
 public class SchedulerTypeResource {
@@ -24,7 +23,7 @@ public class SchedulerTypeResource {
 
     private final Set<String> providerNames;
 
-    public SchedulerTypeResource(Map<String, ProviderFactory> providers) {
+    public SchedulerTypeResource(Map<String, SupplierFactory> providers) {
         providerNames = providers.keySet();
     }
 

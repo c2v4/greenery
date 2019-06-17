@@ -5,15 +5,13 @@ import com.c2v4.greenery.domain.SchedulerConfig;
 import com.c2v4.greenery.repository.EntryRepository;
 import com.c2v4.greenery.repository.SchedulerConfigRepository;
 import com.c2v4.greenery.scheduler.Scheduler;
-import java.io.IOException;
+import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-
-import java.time.Instant;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class SchedulerService {
@@ -23,13 +21,10 @@ public class SchedulerService {
 
     private final List<Scheduler> schedulers;
     private final EntryRepository entryRepository;
-    private final SerialCommunicationService serialCommunicationService;
 
     public SchedulerService(SchedulerFactory schedulerFactory,
-        SchedulerConfigRepository schedulerConfigRepository, EntryRepository entryRepository,
-        SerialCommunicationService serialCommunicationService) {
+        SchedulerConfigRepository schedulerConfigRepository, EntryRepository entryRepository) {
         this.entryRepository = entryRepository;
-        this.serialCommunicationService = serialCommunicationService;
         List<SchedulerConfig> schedulerConfigs = schedulerConfigRepository.findAll();
         this.schedulers =
             schedulerConfigs.stream()

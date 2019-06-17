@@ -1,9 +1,7 @@
 package com.c2v4.greenery.security;
 
 import com.c2v4.greenery.config.Constants;
-
 import java.util.Optional;
-
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
 

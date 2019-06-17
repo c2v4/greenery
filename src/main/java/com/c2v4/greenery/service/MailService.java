@@ -1,13 +1,10 @@
 package com.c2v4.greenery.service;
 
 import com.c2v4.greenery.domain.User;
-
 import io.github.jhipster.config.JHipsterProperties;
-
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import javax.mail.internet.MimeMessage;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;

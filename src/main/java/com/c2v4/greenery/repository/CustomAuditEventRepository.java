@@ -3,7 +3,10 @@ package com.c2v4.greenery.repository;
 import com.c2v4.greenery.config.Constants;
 import com.c2v4.greenery.config.audit.AuditEventConverter;
 import com.c2v4.greenery.domain.PersistentAuditEvent;
-
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.audit.AuditEvent;
@@ -11,9 +14,6 @@ import org.springframework.boot.actuate.audit.AuditEventRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Instant;
-import java.util.*;
 
 /**
  * An implementation of Spring Boot's {@link AuditEventRepository}.

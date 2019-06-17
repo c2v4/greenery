@@ -1,10 +1,8 @@
 package com.c2v4.greenery.config;
 
-import com.c2v4.greenery.security.*;
-import com.c2v4.greenery.security.jwt.*;
-
-import org.springframework.beans.factory.BeanInitializationException;
-import org.springframework.beans.factory.InitializingBean;
+import com.c2v4.greenery.security.AuthoritiesConstants;
+import com.c2v4.greenery.security.jwt.JWTConfigurer;
+import com.c2v4.greenery.security.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;

@@ -1,17 +1,15 @@
 package com.c2v4.greenery.service.dto;
 
 import com.c2v4.greenery.config.Constants;
-
 import com.c2v4.greenery.domain.Authority;
 import com.c2v4.greenery.domain.User;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-
-import javax.validation.constraints.*;
 import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  * A DTO representing a user, with his authorities.

@@ -2,14 +2,13 @@ package com.c2v4.greenery.service;
 
 import com.c2v4.greenery.config.audit.AuditEventConverter;
 import com.c2v4.greenery.repository.PersistenceAuditEventRepository;
+import java.time.Instant;
+import java.util.Optional;
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Instant;
-import java.util.Optional;
 
 /**
  * Service for managing audit events.

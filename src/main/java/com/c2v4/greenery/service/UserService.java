@@ -9,8 +9,17 @@ import com.c2v4.greenery.security.AuthoritiesConstants;
 import com.c2v4.greenery.security.SecurityUtils;
 import com.c2v4.greenery.service.dto.UserDTO;
 import com.c2v4.greenery.service.util.RandomUtil;
-import com.c2v4.greenery.web.rest.errors.*;
-
+import com.c2v4.greenery.web.rest.errors.EmailAlreadyUsedException;
+import com.c2v4.greenery.web.rest.errors.InvalidPasswordException;
+import com.c2v4.greenery.web.rest.errors.LoginAlreadyUsedException;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -20,11 +29,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Service class for managing users.
