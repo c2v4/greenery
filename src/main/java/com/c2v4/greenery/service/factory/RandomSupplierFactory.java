@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.function.Supplier;
 
 @Service("random")
-public class RandomProviderFactory implements ProviderFactory {
+public class RandomSupplierFactory implements SupplierFactory {
 
     private static final String MIN = "min";
     private static final String MAX = "max";

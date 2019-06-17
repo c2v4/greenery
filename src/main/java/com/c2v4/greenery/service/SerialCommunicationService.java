@@ -3,14 +3,17 @@ package com.c2v4.greenery.service;
 import com.c2v4.greenery.config.ApplicationProperties;
 import com.c2v4.greenery.config.ApplicationProperties.Serial;
 import com.fazecast.jSerialComm.SerialPort;
-
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
-public class SerialCommunicationService {
+@Profile("prod")
+public class SerialCommunicationService implements CommunicationService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SchedulerService.class);
 
@@ -39,7 +42,8 @@ public class SerialCommunicationService {
         return isAvailable;
     }
 
-    Optional<String> fetchData(String str) {
+    @Override
+    public Optional<String> fetchData(String str) {
         if (isAvailable && serialPort != null && serialPort.isOpen()) {
             byte[] bytes = str.getBytes();
             synchronized (this) {

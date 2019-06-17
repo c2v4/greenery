@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 import java.util.function.Supplier;
 
 @Service
-public interface ProviderFactory {
+public interface SupplierFactory {
     Supplier<Float> create(SchedulerConfig config);
 }
