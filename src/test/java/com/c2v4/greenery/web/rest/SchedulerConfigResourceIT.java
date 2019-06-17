@@ -33,6 +33,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = GreeneryApp.class)
 public class SchedulerConfigResourceIT {
 
+    private static final String DEFAULT_TYPE = "AAAAAAAAAA";
+    private static final String UPDATED_TYPE = "BBBBBBBBBB";
+
     @Autowired
     private SchedulerConfigRepository schedulerConfigRepository;
 
@@ -74,7 +77,8 @@ public class SchedulerConfigResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static SchedulerConfig createEntity(EntityManager em) {
-        SchedulerConfig schedulerConfig = new SchedulerConfig();
+        SchedulerConfig schedulerConfig = new SchedulerConfig()
+            .type(DEFAULT_TYPE);
         return schedulerConfig;
     }
     /**
@@ -84,7 +88,8 @@ public class SchedulerConfigResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static SchedulerConfig createUpdatedEntity(EntityManager em) {
-        SchedulerConfig schedulerConfig = new SchedulerConfig();
+        SchedulerConfig schedulerConfig = new SchedulerConfig()
+            .type(UPDATED_TYPE);
         return schedulerConfig;
     }
 
@@ -108,6 +113,7 @@ public class SchedulerConfigResourceIT {
         List<SchedulerConfig> schedulerConfigList = schedulerConfigRepository.findAll();
         assertThat(schedulerConfigList).hasSize(databaseSizeBeforeCreate + 1);
         SchedulerConfig testSchedulerConfig = schedulerConfigList.get(schedulerConfigList.size() - 1);
+        assertThat(testSchedulerConfig.getType()).isEqualTo(DEFAULT_TYPE);
     }
 
     @Test
@@ -132,6 +138,24 @@ public class SchedulerConfigResourceIT {
 
     @Test
     @Transactional
+    public void checkTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = schedulerConfigRepository.findAll().size();
+        // set the field null
+        schedulerConfig.setType(null);
+
+        // Create the SchedulerConfig, which fails.
+
+        restSchedulerConfigMockMvc.perform(post("/api/scheduler-configs")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(schedulerConfig)))
+            .andExpect(status().isBadRequest());
+
+        List<SchedulerConfig> schedulerConfigList = schedulerConfigRepository.findAll();
+        assertThat(schedulerConfigList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllSchedulerConfigs() throws Exception {
         // Initialize the database
         schedulerConfigRepository.saveAndFlush(schedulerConfig);
@@ -140,7 +164,8 @@ public class SchedulerConfigResourceIT {
         restSchedulerConfigMockMvc.perform(get("/api/scheduler-configs?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(schedulerConfig.getId().intValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(schedulerConfig.getId().intValue())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
     
     @Test
@@ -153,7 +178,8 @@ public class SchedulerConfigResourceIT {
         restSchedulerConfigMockMvc.perform(get("/api/scheduler-configs/{id}", schedulerConfig.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(schedulerConfig.getId().intValue()));
+            .andExpect(jsonPath("$.id").value(schedulerConfig.getId().intValue()))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
     }
 
     @Test
@@ -176,6 +202,8 @@ public class SchedulerConfigResourceIT {
         SchedulerConfig updatedSchedulerConfig = schedulerConfigRepository.findById(schedulerConfig.getId()).get();
         // Disconnect from session so that the updates on updatedSchedulerConfig are not directly saved in db
         em.detach(updatedSchedulerConfig);
+        updatedSchedulerConfig
+            .type(UPDATED_TYPE);
 
         restSchedulerConfigMockMvc.perform(put("/api/scheduler-configs")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -186,6 +214,7 @@ public class SchedulerConfigResourceIT {
         List<SchedulerConfig> schedulerConfigList = schedulerConfigRepository.findAll();
         assertThat(schedulerConfigList).hasSize(databaseSizeBeforeUpdate);
         SchedulerConfig testSchedulerConfig = schedulerConfigList.get(schedulerConfigList.size() - 1);
+        assertThat(testSchedulerConfig.getType()).isEqualTo(UPDATED_TYPE);
     }
 
     @Test
