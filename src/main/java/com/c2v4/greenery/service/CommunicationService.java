@@ -4,5 +4,5 @@ import java.util.Optional;
 
 public interface CommunicationService {
 
-    Optional<String> fetchData(String str);
+    Optional<String> fetchData(String request);
 }

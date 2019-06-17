@@ -43,9 +43,9 @@ public class SerialCommunicationService implements CommunicationService {
     }
 
     @Override
-    public Optional<String> fetchData(String str) {
+    public Optional<String> fetchData(String request) {
         if (isAvailable && serialPort != null && serialPort.isOpen()) {
-            byte[] bytes = str.getBytes();
+            byte[] bytes = request.getBytes();
             synchronized (this) {
                 serialPort.writeBytes(bytes, bytes.length);
                 byte[] readBuffer = new byte[1024];

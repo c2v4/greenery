@@ -1,22 +1,23 @@
 package com.c2v4.greenery.service;
 
-import org.springframework.context.annotation.Profile;
+import java.util.Map;
+import java.util.function.Supplier;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-@Profile("!prod")
 public class StubSerialCommunicationService implements CommunicationService {
 
+    private final Map<String,Supplier<String>> stubConfig;
+
+    public StubSerialCommunicationService(
+        Map<String, Supplier<String>> stubConfig) {
+        this.stubConfig = stubConfig;
+    }
+
     @Override
-    public Optional<String> fetchData(String str) {
-        switch (str.charAt(0)) {
-            //Place for communication stubs
-            case '2': return Optional.of("2");
-            case '8': return Optional.of("8");
-            default:
-                return Optional.empty();
-        }
+    public Optional<String> fetchData(String request) {
+        return Optional.ofNullable(stubConfig.get(request)).map(Supplier::get);
     }
 }
