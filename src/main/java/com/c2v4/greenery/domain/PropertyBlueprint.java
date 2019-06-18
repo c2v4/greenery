@@ -33,31 +33,4 @@ public class PropertyBlueprint {
         return required;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        PropertyBlueprint that = (PropertyBlueprint) o;
-        return required == that.required &&
-            Objects.equals(key, that.key) &&
-            Objects.equals(validationRegex, that.validationRegex);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(key, validationRegex, required);
-    }
-
-    @Override
-    public String toString() {
-        return "PropertyBlueprint{" +
-            "key='" + key + '\'' +
-            ", validationRegex='" + validationRegex + '\'' +
-            ", required=" + required +
-            '}';
-    }
 }

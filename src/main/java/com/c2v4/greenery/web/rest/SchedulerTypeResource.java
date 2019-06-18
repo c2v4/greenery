@@ -2,14 +2,12 @@ package com.c2v4.greenery.web.rest;
 
 
 import com.c2v4.greenery.domain.PropertyBlueprint;
-import com.c2v4.greenery.domain.SchedulerConfig;
 import com.c2v4.greenery.service.factory.SupplierFactory;
 import io.github.jhipster.web.util.ResponseUtil;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
