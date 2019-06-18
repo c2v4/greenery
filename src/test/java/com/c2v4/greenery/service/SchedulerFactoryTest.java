@@ -3,11 +3,15 @@ package com.c2v4.greenery.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.c2v4.greenery.domain.PropertyBlueprint;
 import com.c2v4.greenery.domain.SchedulerConfig;
 import com.c2v4.greenery.scheduler.Scheduler;
 import com.c2v4.greenery.service.factory.SupplierFactory;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Supplier;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +34,17 @@ class SchedulerFactoryTest {
 
     @Test
     void createScheduler() {
-        providers.put("providerName", (config) -> () -> 3f);
+        providers.put("providerName", new SupplierFactory() {
+            @Override
+            public Supplier<Float> create(SchedulerConfig config) {
+                return () -> 3F;
+            }
+
+            @Override
+            public Set<PropertyBlueprint> getPropertyBlueprints() {
+                return Collections.emptySet();
+            }
+        });
         Scheduler scheduler = schedulerFactory
             .createScheduler(new SchedulerConfig().type("providerName"));
         assertThat(scheduler).isNotNull();
