@@ -1,11 +1,5 @@
-id;jhi_key;jhi_value
-1;compress South Georgia and the South Sandwich Islands;compelling mission-critical
-2;bifurcated scalable;Small
-3;deliverables reinvent 24 hour;overriding
-4;monitor 1080p Checking Account;world-class Frozen IB
-5;Highway Ergonomic;moratorium moratorium
-6;New York tangible Mississippi;Frozen bus
-7;hard drive Robust Networked;Poland
-8;Small partnerships;Outdoors
-9;Harbor Montana;Corporate Phased relationships
-10;white Brand Money Market Account;Salad Web virtual
+id;jhi_key;jhi_value;scheduler_config_id
+1;pin;2;2
+2;pin;2;3
+3;mode;temperature;2
+4;mode;humidity;3

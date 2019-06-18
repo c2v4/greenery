@@ -19,7 +19,7 @@ public class ApplicationProperties {
 
     public static class Serial {
 
-        private String port;
+        private String port = "/dev/ttyACM0";
         private int timeOut = 1000;
         private int baudRate = 9600;
 

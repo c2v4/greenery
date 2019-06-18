@@ -39,10 +39,10 @@ public class SerialCommunicationService implements CommunicationService {
 
     @Override
     public Optional<String> fetchData(String request) {
-        LOGGER.debug("Fetching data for request: {}", request);
         if (isAvailable && serialPort != null && serialPort.isOpen()) {
             byte[] bytes = request.getBytes();
             synchronized (this) {
+                LOGGER.debug("Fetching data for request: {}", request);
                 serialPort.writeBytes(bytes, bytes.length);
                 byte[] readBuffer = new byte[1024];
                 int numRead = serialPort.readBytes(readBuffer, readBuffer.length);
