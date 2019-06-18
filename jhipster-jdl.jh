@@ -1,5 +1,5 @@
 entity Entry {
-	value Float required,
+	value Double required,
     date Instant required
 }
 

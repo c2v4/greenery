@@ -7,6 +7,7 @@ import com.c2v4.greenery.repository.SchedulerConfigRepository;
 import com.c2v4.greenery.scheduler.Scheduler;
 import java.time.Instant;
 import java.util.List;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,11 +36,12 @@ public class SchedulerService {
     @Scheduled(fixedRate = SCHEDULER_RATE)
     public void tick(){
         schedulers.stream().parallel().forEach(scheduler -> {
-            Float value = scheduler.getValue();
-            if (value == null) {
+            OptionalDouble result = scheduler.getValue();
+            if (!result.isPresent()) {
                 LOGGER.warn("Scheduler: {} produced no value", scheduler);
             }
-            entryRepository.save(new Entry(value, scheduler.getLabel(), Instant.now()));
+            result.ifPresent(value -> entryRepository.save(new Entry(value, scheduler.getLabel(), Instant.now())));
+
         });
     }
 }

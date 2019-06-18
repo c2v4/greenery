@@ -1,19 +1,20 @@
 package com.c2v4.greenery.scheduler;
 
 import com.c2v4.greenery.domain.Label;
+import java.util.OptionalDouble;
 import java.util.function.Supplier;
 
 public class Scheduler {
 
     private final Label label;
-    private final Supplier<Float> supplier;
+    private final Supplier<OptionalDouble> supplier;
 
-    public Scheduler(Label label, Supplier<Float> supplier) {
+    public Scheduler(Label label, Supplier<OptionalDouble> supplier) {
         this.label = label;
         this.supplier = supplier;
     }
 
-    public Float getValue() {
+    public OptionalDouble getValue() {
         return supplier.get();
     }
 

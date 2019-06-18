@@ -35,8 +35,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = GreeneryApp.class)
 public class EntryResourceIT {
 
-    private static final Float DEFAULT_VALUE = 1F;
-    private static final Float UPDATED_VALUE = 2F;
+    private static final Double DEFAULT_VALUE = 1.0;
+    private static final Double UPDATED_VALUE = 2.0;
 
     private static final Instant DEFAULT_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);

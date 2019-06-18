@@ -3,7 +3,7 @@
     "fields": [
         {
             "fieldName": "value",
-            "fieldType": "Float",
+            "fieldType": "Double",
             "fieldValidateRules": [
                 "required"
             ]
