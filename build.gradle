@@ -210,9 +210,9 @@ dependencies {
         exclude module: "mapstruct"
     }
     implementation "io.springfox:springfox-bean-validators"
-    implementation "org.postgresql:postgresql"
+    implementation "org.postgresql:postgresql:42.2.5"
     compile 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
-    liquibaseRuntime "org.postgresql:postgresql"
+    liquibaseRuntime "org.postgresql:postgresql:42.2.5"
     implementation "org.mapstruct:mapstruct:${mapstruct_version}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
     annotationProcessor "org.hibernate:hibernate-jpamodelgen:${hibernate_version}"

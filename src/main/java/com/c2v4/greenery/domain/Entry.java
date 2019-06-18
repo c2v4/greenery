@@ -29,7 +29,7 @@ public class Entry implements Serializable {
     public Entry() {
     }
 
-    public Entry(@NotNull Float value, @NotNull Label label, @NotNull Instant date) {
+    public Entry(Double value, @NotNull Label label, @NotNull Instant date) {
         this.value = value;
         this.label = label;
         this.date = date;
@@ -42,7 +42,7 @@ public class Entry implements Serializable {
 
     @NotNull
     @Column(name = "jhi_value", nullable = false)
-    private Float value;
+    private Double value;
 
     @NotNull
     @Column(name = "jhi_date", nullable = false)
@@ -61,16 +61,16 @@ public class Entry implements Serializable {
         this.id = id;
     }
 
-    public Float getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public Entry value(Float value) {
+    public Entry value(Double value) {
         this.value = value;
         return this;
     }
 
-    public void setValue(Float value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 

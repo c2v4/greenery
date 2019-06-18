@@ -45,6 +45,15 @@ public class Property implements Serializable {
     @JsonIgnoreProperties("properties")
     private ExecutorConfig executorConfig;
 
+    public Property(){
+
+    }
+
+    public Property(@NotNull String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;

@@ -30,6 +30,8 @@ application:
     port: '/dev/ttyACM0'
 
 spring:
+  profiles:
+    active: serial
   devtools:
     restart:
       enabled: false

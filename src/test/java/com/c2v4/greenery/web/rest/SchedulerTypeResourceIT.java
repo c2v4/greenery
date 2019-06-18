@@ -84,6 +84,7 @@ public class SchedulerTypeResourceIT {
         restSchedulerTypeMockMvc.perform(get("/api/scheduler-properties"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andDo(print())
             .andExpect(jsonPath("$.random..key").value(hasItem("min")))
             .andExpect(jsonPath("$.random..required").value(hasItem(false)));
     }
@@ -96,6 +97,7 @@ public class SchedulerTypeResourceIT {
             .perform(get("/api/scheduler-configs/{schedulerName}", "random"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andDo(print())
             .andExpect(jsonPath("$..key").value(hasItem("min")))
             .andExpect(jsonPath("$..required").value(hasItem(false)));
     }

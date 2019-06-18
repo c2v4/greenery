@@ -3,7 +3,7 @@ spring:
     active: h2
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/greenery
+    url: jdbc:postgresql://localhost:5432/greenery?stringtype=unspecified
     username: greenery
     password: greenery123
     hikari:
