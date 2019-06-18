@@ -1,7 +1,9 @@
 package com.c2v4.greenery.web.rest;
 
 import static com.c2v4.greenery.web.rest.TestUtil.createFormattingConversionService;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -73,6 +75,29 @@ public class SchedulerTypeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect((jsonPath("$", Matchers.hasSize(schedulerTypes.size()))));
+    }
+
+    @Test
+    @Transactional
+    public void getAllSchedulerConfigs() throws Exception {
+        // Get all the schedulerConfigList
+        restSchedulerTypeMockMvc.perform(get("/api/scheduler-properties"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.random..key").value(hasItem("min")))
+            .andExpect(jsonPath("$.random..required").value(hasItem(false)));
+    }
+
+    @Test
+    @Transactional
+    public void getSchedulerConfig() throws Exception {
+        // Get the schedulerConfig
+        restSchedulerTypeMockMvc
+            .perform(get("/api/scheduler-configs/{schedulerName}", "random"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$..key").value(hasItem("min")))
+            .andExpect(jsonPath("$..required").value(hasItem(false)));
     }
 
 }
